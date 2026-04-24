@@ -25,7 +25,7 @@
         --accent: #5eead4;
         --accent-2: #f59e0b;
         --accent-3: #60a5fa;
-        --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+        --shadow: 0 12px 36px rgba(0, 0, 0, 0.24);
       }
 
       * {
@@ -87,8 +87,7 @@
           var(--accent-3),
           var(--accent-2)
         );
-        box-shadow: 0 0 18px rgba(94, 234, 212, 0.55);
-        transition: width 0.35s ease;
+        transition: width 0.22s ease-out;
       }
 
       .slide-counter {
@@ -116,18 +115,21 @@
         align-items: center;
         opacity: 0;
         visibility: hidden;
-        transform: translateX(50px) scale(0.98);
+        pointer-events: none;
+        transform: translate3d(24px, 0, 0);
         transition:
-          opacity 0.45s ease,
-          transform 0.45s ease,
-          visibility 0.45s ease;
+          opacity 0.22s ease-out,
+          transform 0.22s ease-out,
+          visibility 0.22s ease-out;
         overflow: hidden;
+        will-change: opacity, transform;
       }
 
       .slide.active {
         opacity: 1;
         visibility: visible;
-        transform: translateX(0) scale(1);
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0);
         z-index: 2;
       }
 
@@ -143,22 +145,6 @@
             rgba(3, 10, 18, 0.82) 100%
           ),
           var(--bg-image) center/cover no-repeat;
-        transform: scale(1.04);
-      }
-
-      .slide::after {
-        content: '';
-        position: absolute;
-        inset: auto -10% -30% auto;
-        width: 30rem;
-        height: 30rem;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(94, 234, 212, 0.16),
-          transparent 68%
-        );
-        pointer-events: none;
       }
 
       .content {
@@ -172,7 +158,6 @@
       .panel {
         background: var(--panel);
         border: 1px solid var(--line);
-        backdrop-filter: blur(16px);
         box-shadow: var(--shadow);
         border-radius: 28px;
         padding: 32px;
@@ -426,7 +411,6 @@
         border-radius: 999px;
         background: rgba(7, 20, 31, 0.62);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(12px);
       }
 
       .dot {
@@ -436,9 +420,7 @@
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.24);
         cursor: pointer;
-        transition:
-          transform 0.2s ease,
-          background 0.2s ease;
+        transition: transform 0.18s ease-out, background 0.18s ease-out;
       }
 
       .dot.active {
@@ -464,6 +446,7 @@
           border-radius: 22px;
           max-height: calc(100vh - 230px);
           overflow: auto;
+          -webkit-overflow-scrolling: touch;
         }
 
         .controls {
@@ -496,7 +479,7 @@
           id="slide-1"
           data-title="Pembuka"
           style="
-            --bg-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80');
+            --bg-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80');
           "
         >
           <div class="content">
@@ -551,7 +534,7 @@
           id="slide-2"
           data-title="Masalah Umum"
           style="
-            --bg-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');
+            --bg-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80');
           "
         >
           <div class="content">
@@ -609,7 +592,7 @@
           id="slide-3"
           data-title="Pilar Produk"
           style="
-            --bg-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=80');
+            --bg-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80');
           "
         >
           <div class="content">
@@ -659,7 +642,7 @@
           id="slide-4"
           data-title="Pilar Market"
           style="
-            --bg-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80');
+            --bg-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&q=80');
           "
         >
           <div class="content">
@@ -706,7 +689,7 @@
           id="slide-5"
           data-title="Pilar Publikasi"
           style="
-            --bg-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80');
+            --bg-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80');
           "
         >
           <div class="content">
@@ -769,7 +752,7 @@
           id="slide-6"
           data-title="CTA Penutup"
           style="
-            --bg-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80');
+            --bg-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80');
           "
         >
           <div class="content">
