@@ -35,6 +35,8 @@
       html,
       body {
         height: 100%;
+        width: 100%;
+        overflow-x: hidden;
       }
 
       body {
@@ -53,6 +55,7 @@
 
       .presentation-shell {
         position: relative;
+        width: 100%;
         min-height: 100vh;
         overflow: hidden;
       }
@@ -61,7 +64,9 @@
         position: fixed;
         top: 0;
         left: 0;
+        right: 0;
         width: 100%;
+        max-width: 100%;
         z-index: 20;
         padding: 20px 24px 0;
       }
@@ -105,12 +110,17 @@
       .deck {
         position: relative;
         width: 100%;
+        max-width: 100%;
         height: 100vh;
+        overflow: hidden;
+        touch-action: pan-y;
       }
 
       .slide {
         position: absolute;
         inset: 0;
+        width: 100%;
+        max-width: 100%;
         display: grid;
         align-items: center;
         opacity: 0;
@@ -149,6 +159,7 @@
 
       .content {
         width: min(1120px, calc(100% - 32px));
+        max-width: calc(100vw - 32px);
         margin: 0 auto;
         position: relative;
         z-index: 1;
@@ -376,6 +387,7 @@
       .nav-btn:hover {
         transform: translateY(-2px);
         opacity: 0.94;
+        cursor: pointer;
       }
 
       .nav-btn[disabled] {
@@ -397,10 +409,22 @@
         transform: translateX(-50%);
         z-index: 20;
         width: min(1100px, calc(100% - 24px));
+        max-width: calc(100vw - 24px);
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 14px;
+      }
+
+      .nav-btn,
+      .dots,
+      .panel,
+      .metric-card,
+      .idea-card,
+      .step-card,
+      .quote-card,
+      .cta-box {
+        max-width: 100%;
       }
 
       .dots {
@@ -420,7 +444,9 @@
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.24);
         cursor: pointer;
-        transition: transform 0.18s ease-out, background 0.18s ease-out;
+        transition:
+          transform 0.18s ease-out,
+          background 0.18s ease-out;
       }
 
       .dot.active {
@@ -437,7 +463,8 @@
         }
 
         .content {
-          width: min(100% - 24px, 1120px);
+          width: calc(100% - 24px);
+          max-width: calc(100vw - 24px);
           padding: 92px 0 130px;
         }
 
@@ -450,6 +477,12 @@
         }
 
         .controls {
+          left: 12px;
+          right: 12px;
+          bottom: 16px;
+          transform: none;
+          width: auto;
+          max-width: none;
           flex-wrap: wrap;
           justify-content: center;
         }
@@ -457,6 +490,17 @@
         .slide-counter {
           font-size: 0.78rem;
           gap: 12px;
+        }
+
+        .progress-wrap {
+          padding: 14px 12px 0;
+        }
+
+        .dots {
+          max-width: 100%;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding: 10px 12px;
         }
       }
     </style>
@@ -825,7 +869,11 @@
       const prevBtn = document.getElementById('prevBtn');
       const nextBtn = document.getElementById('nextBtn');
       const dotsNav = document.getElementById('dotsNav');
+      const deck = document.getElementById('deck');
       let currentSlide = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchActive = false;
 
       slides.forEach((slide, index) => {
         const dot = document.createElement('button');
@@ -874,6 +922,40 @@
           goToSlide(currentSlide - 1);
         }
       });
+
+      deck.addEventListener(
+        'touchstart',
+        (event) => {
+          if (event.touches.length !== 1) return;
+          touchStartX = event.touches[0].clientX;
+          touchStartY = event.touches[0].clientY;
+          touchActive = true;
+        },
+        { passive: true },
+      );
+
+      deck.addEventListener(
+        'touchend',
+        (event) => {
+          if (!touchActive || event.changedTouches.length !== 1) return;
+
+          const deltaX = event.changedTouches[0].clientX - touchStartX;
+          const deltaY = event.changedTouches[0].clientY - touchStartY;
+          const absX = Math.abs(deltaX);
+          const absY = Math.abs(deltaY);
+
+          touchActive = false;
+
+          if (absX < 50 || absX <= absY) return;
+
+          if (deltaX < 0) {
+            goToSlide(currentSlide + 1);
+          } else {
+            goToSlide(currentSlide - 1);
+          }
+        },
+        { passive: true },
+      );
 
       updateUI();
     </script>
