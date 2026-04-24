@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dalil Branding - Premium Slides</title>
+    <title>Dalil Branding — High Ticket Slides</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
       rel="stylesheet"
@@ -16,10 +16,11 @@
       :root {
         --bg: #06131f;
         --panel: rgba(255, 255, 255, 0.06);
-        --line: rgba(255, 255, 255, 0.1);
+        --line: rgba(255, 255, 255, 0.12);
         --text: #ecf7ff;
         --muted: #bed4df;
         --accent: #5eead4;
+        --accent2: #60a5fa;
       }
       * {
         box-sizing: border-box;
@@ -27,25 +28,30 @@
       body {
         margin: 0;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background: #041019;
+        background: linear-gradient(180deg, #041019, #081722);
         color: var(--text);
         overflow: hidden;
       }
       .slide {
         position: absolute;
         inset: 0;
-        display: none;
+        display: grid;
+        align-items: center;
         padding: 60px;
+        opacity: 0;
+        transform: translateX(20px);
+        transition: 0.25s;
       }
       .slide.active {
-        display: block;
+        opacity: 1;
+        transform: none;
       }
       .slide::before {
         content: '';
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(120deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4)),
+          linear-gradient(120deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)),
           var(--bg-img) center/cover;
       }
       .content {
@@ -58,11 +64,12 @@
         border: 1px solid var(--line);
         border-radius: 28px;
         padding: 32px;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(12px);
       }
       h1 {
-        font-size: clamp(2.8rem, 6vw, 5rem);
+        font-size: clamp(3rem, 6vw, 5.2rem);
         margin: 0 0 12px;
+        letter-spacing: -0.03em;
       }
       h2 {
         font-size: clamp(1.8rem, 4vw, 3rem);
@@ -81,6 +88,7 @@
         background: rgba(255, 255, 255, 0.05);
         padding: 18px;
         border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
       }
       .badge {
         display: inline-block;
@@ -88,6 +96,16 @@
         padding: 8px 14px;
         border-radius: 999px;
         margin-bottom: 10px;
+        font-weight: 700;
+      }
+      .progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        background: linear-gradient(90deg, var(--accent), var(--accent2));
+        width: 0%;
+        z-index: 10;
       }
       .controls {
         position: fixed;
@@ -95,29 +113,64 @@
         left: 50%;
         transform: translateX(-50%);
         display: flex;
-        gap: 10px;
+        align-items: center;
+        gap: 12px;
+        z-index: 10;
       }
       button {
         padding: 10px 18px;
         border-radius: 999px;
-        border: 1px solid #fff;
+        border: 1px solid rgba(255, 255, 255, 0.3);
         background: transparent;
         color: #fff;
+        cursor: pointer;
       }
-      .progress {
+      .dots {
+        display: flex;
+        gap: 6px;
+      }
+      .dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff3;
+        cursor: pointer;
+      }
+      .dot.active {
+        background: #fff;
+        transform: scale(1.3);
+      }
+      .counter {
         position: fixed;
-        top: 0;
-        left: 0;
-        height: 6px;
-        background: linear-gradient(90deg, #5eead4, #60a5fa);
-        width: 0%;
+        top: 12px;
+        right: 20px;
+        font-size: 0.9rem;
+        color: #fff8;
+        z-index: 10;
+      }
+      .cta a {
+        display: inline-block;
+        margin: 8px;
+        padding: 12px 20px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .cta .main {
+        background: #fff;
+        color: #000;
+      }
+      .cta .alt {
+        border: 1px solid #fff;
+        color: #fff;
       }
     </style>
   </head>
   <body>
     <div class="progress" id="progress"></div>
+    <div class="counter" id="counter"></div>
 
-    <!-- Slide 1 -->
+    <!-- Slides -->
     <div
       class="slide active"
       style="
@@ -129,14 +182,13 @@
           <span class="badge">Opening</span>
           <h1>Dalil Branding</h1>
           <p>
-            Prinsip fundamental agar brand tidak lemah, tidak murah, dan tidak
+            Kalau brand lemah, bisnis akan selalu perang harga dan mudah
             dilupakan.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Slide 2 -->
     <div
       class="slide"
       style="
@@ -145,21 +197,20 @@
     >
       <div class="content">
         <div class="panel">
-          <h2>Masalah Utama</h2>
+          <h2>Realita di Lapangan</h2>
           <p>
-            Banyak bisnis bagus… tapi tetap kalah karena tidak punya branding
-            yang jelas.
+            Produk bagus belum tentu laku. Yang menang adalah yang paling jelas
+            di kepala market.
           </p>
           <ul>
             <li>Tidak beda → dibanding harga</li>
-            <li>Tidak dikenal → tidak dibeli</li>
+            <li>Tidak dikenal → tidak dipilih</li>
             <li>Tidak dipercaya → tidak closing</li>
           </ul>
         </div>
       </div>
     </div>
 
-    <!-- Slide 3 -->
     <div
       class="slide"
       style="
@@ -168,14 +219,12 @@
     >
       <div class="content">
         <div class="panel">
-          <h2>Mindset Shift</h2>
           <h1>Brand = Persepsi</h1>
-          <p>Bukan apa yang kamu buat. Tapi apa yang mereka pikirkan.</p>
+          <p>Bukan apa yang kamu buat. Tapi apa yang mereka ingat.</p>
         </div>
       </div>
     </div>
 
-    <!-- Slide 4 -->
     <div
       class="slide"
       style="
@@ -184,11 +233,11 @@
     >
       <div class="content">
         <div class="panel">
-          <h2>Dalil Inti (1-5)</h2>
+          <h2>Dalil Inti</h2>
           <div class="grid">
             <div class="card">
               <b>Persepsi</b>
-              <p>Brand ada di pikiran</p>
+              <p>Menentukan segalanya</p>
             </div>
             <div class="card">
               <b>Positioning</b>
@@ -200,18 +249,21 @@
             </div>
             <div class="card">
               <b>Trust</b>
-              <p>Bangun kepercayaan</p>
+              <p>Tanpa ini tidak closing</p>
             </div>
             <div class="card">
               <b>Konsistensi</b>
               <p>Ulang terus</p>
+            </div>
+            <div class="card">
+              <b>Emosi</b>
+              <p>Keputusan beli</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 5 -->
     <div
       class="slide"
       style="
@@ -220,26 +272,25 @@
     >
       <div class="content">
         <div class="panel">
-          <h2>Dalil Emosi & Story</h2>
+          <h2>Dalil Konten & Relevansi</h2>
           <div class="grid">
             <div class="card">
-              <b>Emosi</b>
-              <p>Beli pakai rasa</p>
-            </div>
-            <div class="card">
               <b>Story</b>
-              <p>Lebih mudah diingat</p>
+              <p>Lebih diingat</p>
             </div>
             <div class="card">
               <b>Relevansi</b>
               <p>Harus nyambung</p>
+            </div>
+            <div class="card">
+              <b>Simplicity</b>
+              <p>Jangan rumit</p>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 6 -->
     <div
       class="slide"
       style="
@@ -252,13 +303,12 @@
           <div class="grid">
             <div class="card"><b>Frekuensi</b></div>
             <div class="card"><b>Komunitas</b></div>
-            <div class="card"><b>Simplicity</b></div>
+            <div class="card"><b>Experience</b></div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Slide 7 -->
     <div
       class="slide"
       style="
@@ -267,10 +317,9 @@
     >
       <div class="content">
         <div class="panel">
-          <h2>Dalil Lanjutan</h2>
+          <h2>Dalil Strategi</h2>
           <div class="grid">
             <div class="card"><b>Anti Diskon</b></div>
-            <div class="card"><b>Experience</b></div>
             <div class="card"><b>Fokus</b></div>
             <div class="card"><b>Jangka Panjang</b></div>
           </div>
@@ -278,7 +327,6 @@
       </div>
     </div>
 
-    <!-- Slide 8 -->
     <div
       class="slide"
       style="
@@ -288,18 +336,13 @@
       <div class="content">
         <div class="panel">
           <h2>Ringkasan Inti</h2>
-          <ul>
-            <li>Jelas</li>
-            <li>Berbeda</li>
-            <li>Dipercaya</li>
-            <li>Konsisten</li>
-            <li>Bernilai</li>
-          </ul>
+          <p>
+            Brand kuat = jelas, beda, dipercaya, konsisten, dan terasa nilainya.
+          </p>
         </div>
       </div>
     </div>
 
-    <!-- Slide 9 CTA -->
     <div
       class="slide"
       style="
@@ -307,41 +350,62 @@
       "
     >
       <div class="content">
-        <div class="panel">
-          <h2>Bangun Branding Anda</h2>
-          <p>Mulai dari positioning yang jelas dan sistem yang konsisten.</p>
-          <a href="https://carisolusi.biz.id">Website</a><br />
-          <a href="https://wa.me/6281384072641">Konsultasi WhatsApp</a>
+        <div class="panel cta">
+          <h2>Bangun Branding Anda Sekarang</h2>
+          <p>
+            Kalau tidak dibangun, market akan menentukan sendiri persepsinya —
+            dan itu jarang menguntungkan.
+          </p>
+          <a class="main" href="https://carisolusi.biz.id">Kunjungi Website</a>
+          <a class="alt" href="https://wa.me/6281384072641"
+            >Konsultasi WhatsApp</a
+          >
         </div>
       </div>
     </div>
 
     <div class="controls">
       <button onclick="prev()">Prev</button>
+      <div class="dots" id="dots"></div>
       <button onclick="next()">Next</button>
     </div>
 
     <script>
-      let i = 0;
       const slides = document.querySelectorAll('.slide');
       const progress = document.getElementById('progress');
-      function show() {
+      const counter = document.getElementById('counter');
+      const dotsWrap = document.getElementById('dots');
+      let i = 0;
+      slides.forEach((_, idx) => {
+        let d = document.createElement('div');
+        d.className = 'dot';
+        d.onclick = () => go(idx);
+        dotsWrap.appendChild(d);
+      });
+      const dots = document.querySelectorAll('.dot');
+      function update() {
         slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
+        dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
         progress.style.width = ((i + 1) / slides.length) * 100 + '%';
+        counter.innerText = `${i + 1} / ${slides.length}`;
       }
       function next() {
         if (i < slides.length - 1) i++;
-        show();
+        update();
       }
       function prev() {
         if (i > 0) i--;
-        show();
+        update();
+      }
+      function go(x) {
+        i = x;
+        update();
       }
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight') next();
         if (e.key === 'ArrowLeft') prev();
       });
-      show();
+      update();
     </script>
   </body>
 </html>
