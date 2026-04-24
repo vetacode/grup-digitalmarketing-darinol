@@ -1,0 +1,1633 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edukasi Bisnis Digital Dari Nol</title>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edukasi Digitalisasi Bisnis</title>
+    <link
+      rel="icon"
+      type="image/webp"
+      href="https://carisolusi.biz.id/gambarbebas/20260322-103256_logo-diamant-blue.webp"
+    />
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      * {
+        scroll-behavior: smooth;
+      }
+      body {
+        background-color: #0f172a;
+        color: #e5e7eb !important;
+      }
+
+      .card {
+        background: rgba(30, 41, 59, 0.8);
+        backdrop-filter: blur(10px);
+        padding: 40px;
+        border-radius: 24px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        transition: 0.3s;
+        transform: translateY(40px);
+        opacity: 0;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+      }
+
+      .title {
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .desc {
+        font-size: 18px;
+        color: #cbd5f5;
+        line-height: 1.7;
+      }
+
+      .icon {
+        width: 40px;
+        height: 40px;
+        color: #60a5fa;
+      }
+
+      .dayBtn {
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid #334155;
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: bold;
+        transition: 0.2s;
+      }
+
+      .dayBtn:hover {
+        background: #3b82f6;
+      }
+
+      .dayBtn.active {
+        background: #3b82f6;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- HERO -->
+    <section
+      class="relative h-screen flex items-center justify-center text-center"
+      id="hero"
+    >
+      <!-- DAY NAV QUICK ACCESS -->
+
+      <div class="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
+        Hari Ke -
+        <div class="flex gap-2 flex-wrap justify-center mt-2">
+          <a href="#content">
+            <button onclick="goToDay(1)" class="dayBtn active">1</button>
+            <button onclick="goToDay(2)" class="dayBtn">2</button>
+            <button onclick="goToDay(3)" class="dayBtn">3</button>
+            <button onclick="goToDay(4)" class="dayBtn">4</button>
+            <button onclick="goToDay(5)" class="dayBtn">5</button>
+            <button onclick="goToDay(6)" class="dayBtn">6</button>
+            <button onclick="goToDay(7)" class="dayBtn">7</button>
+          </a>
+        </div>
+      </div>
+      <img
+        src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b"
+        class="absolute w-full h-full object-cover opacity-20 img-responsive"
+      />
+
+      <div class="relative z-10 max-w-3xl px-6">
+        <h1 class="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+          Rahasia bisnis berkembang di era digital:
+          <span class="text-blue-400">Tampil di Google</span>
+        </h1>
+        <p class="text-lg text-gray-300 mb-8">
+          Mulai digitalisasi bisnis dari nol, tanpa ribet coding.
+        </p>
+        <a href="#content">
+          <button
+            class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl font-semibold transition"
+          >
+            Mulai Belajar
+          </button>
+        </a>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section
+      class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur border-b border-slate-700"
+    >
+      <div class="max-w-4xl mx-auto px-6 py-4">
+        <div class="flex justify-between text-sm mb-2">
+          <span id="dayLabel">Day 1 / 7</span>
+          <span>Progress</span>
+        </div>
+        <div class="w-full bg-slate-700 rounded-full h-2">
+          <div
+            id="progressBar"
+            class="bg-blue-400 h-2 rounded-full transition-all duration-500"
+            style="width: 14.2857%"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTENT -->
+    <section id="content" class="py-20 px-6 max-w-4xl mx-auto space-y-10">
+      <!-- CARD 1 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="users"
+            aria-hidden="true"
+            class="lucide lucide-users icon"
+          >
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+          </svg>
+          <h3 class="title">Realita Perubahan Perilaku Customer</h3>
+        </div>
+        <p class="desc">
+          <strong>Dulu:</strong><br />
+          Orang tanya tetangga<br />
+          Jalan keliling cari toko<br />
+          Lihat spanduk<br /><br />
+
+          <strong>Sekarang:</strong><br />
+          Refleks pertama: buka Google<br /><br />
+
+          Bahkan untuk hal kecil:<br />
+          Cari makan<br />
+          Cari tukang<br />
+          Cari jasa
+        </p>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="search"
+            aria-hidden="true"
+            class="lucide lucide-search icon"
+          >
+            <path d="m21 21-4.34-4.34"></path>
+            <circle cx="11" cy="11" r="8"></circle>
+          </svg>
+          <h3 class="title">Cara Orang Beli Sekarang</h3>
+        </div>
+        <p class="desc">
+          Ada kebutuhan<br />
+          Buka Google<br />
+          Ketik kata kunci<br />
+          Bandingkan beberapa pilihan<br />
+          Chat / beli<br /><br />
+
+          📌 Artinya:<br />
+          Kalau bisnis kamu tidak muncul di tahap no. 2<br />
+          ➡️ Kamu tidak masuk dalam pilihan
+        </p>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="alert-triangle"
+            aria-hidden="true"
+            class="lucide lucide-alert-triangle icon"
+          >
+            <path
+              d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"
+            ></path>
+            <path d="M12 9v4"></path>
+            <path d="M12 17h.01"></path>
+          </svg>
+          <h3 class="title">Masalah Besar Pebisnis Pemula</h3>
+        </div>
+        <p class="desc">
+          Banyak yang berpikir:<br />
+          “Yang penting produk saya bagus”<br /><br />
+
+          Produk bagus tapi tidak terlihat = tidak laku<br />
+          Produk biasa tapi mudah ditemukan = bisa laku
+        </p>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="bar-chart"
+            aria-hidden="true"
+            class="lucide lucide-bar-chart icon"
+          >
+            <path d="M5 21v-6"></path>
+            <path d="M12 21V9"></path>
+            <path d="M19 21V3"></path>
+          </svg>
+          <h3 class="title">Ilustrasi Simple</h3>
+        </div>
+        <p class="desc">
+          A: Produk bagus tapi tidak ada di Google<br />
+          B: Produk standar tapi muncul di Google<br /><br />
+
+          ➡️ Yang muncul di Google lebih sering dapat pelanggan
+        </p>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="brain"
+            aria-hidden="true"
+            class="lucide lucide-brain icon"
+          >
+            <path d="M12 18V5"></path>
+            <path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"></path>
+            <path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"></path>
+            <path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"></path>
+            <path d="M18 18a4 4 0 0 0 2-7.464"></path>
+            <path
+              d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"
+            ></path>
+            <path d="M6 18a4 4 0 0 1-2-7.464"></path>
+            <path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"></path>
+          </svg>
+          <h3 class="title">Perubahan Cara Main Bisnis</h3>
+        </div>
+        <p class="desc">
+          Dulu: Lokasi strategis<br />
+          Sekarang: Posisi di Google<br /><br />
+
+          Bukan lagi soal tempat,<br />
+          tapi soal ditemukan
+        </p>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="x-circle"
+            aria-hidden="true"
+            class="lucide lucide-x-circle icon"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="m15 9-6 6"></path>
+            <path d="m9 9 6 6"></path>
+          </svg>
+          <h3 class="title">Kesalahan Umum Pemula</h3>
+        </div>
+        <p class="desc">
+          Nanti saja kalau sudah besar<br />
+          Belum perlu online<br />
+          Masih kecil<br /><br />
+
+          Padahal:<br />
+          Bisnis kecil harus mulai digital duluan
+        </p>
+      </div>
+
+      <!-- CARD 7 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="dollar-sign"
+            aria-hidden="true"
+            class="lucide lucide-dollar-sign icon"
+          >
+            <line x1="12" x2="12" y1="2" y2="22"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <h3 class="title">Kenapa Google Powerful</h3>
+        </div>
+        <p class="desc">
+          Orang yang cari = sudah butuh<br /><br />
+
+          “jasa sedot wc sukabumi”<br /><br />
+
+          ➡️ Itu bukan iseng<br />
+          ➡️ Itu siap bayar
+        </p>
+      </div>
+
+      <!-- CARD 8 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="target"
+            aria-hidden="true"
+            class="lucide lucide-target icon"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <circle cx="12" cy="12" r="6"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+          </svg>
+          <h3 class="title">Insight Utama</h3>
+        </div>
+        <p class="desc">
+          Bukan yang paling bagus yang menang,<br />
+          tapi yang paling mudah ditemukan
+        </p>
+      </div>
+
+      <!-- CARD 9 -->
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            data-lucide="rocket"
+            aria-hidden="true"
+            class="lucide lucide-rocket icon"
+          >
+            <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+            <path
+              d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"
+            ></path>
+            <path
+              d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"
+            ></path>
+            <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path>
+          </svg>
+          <h3 class="title">Penutup</h3>
+        </div>
+        <p class="desc">
+          Kalau bisnis kamu belum ada di Google,<br />
+          berarti kamu belum masuk ke pilihan customer.<br /><br />
+
+          Mulai dari sekarang,<br />
+          pikirkan bagaimana caranya bisnis kamu bisa ditemukan.
+        </p>
+      </div>
+    </section>
+
+    <!-- CTA2 -->
+    <section id="ctaFinal" class="hidden pb-10">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="card">
+          <div class="flex items-center gap-4 mb-6">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              data-lucide="rocket"
+              aria-hidden="true"
+              class="lucide lucide-rocket icon"
+            >
+              <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path>
+              <path
+                d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"
+              ></path>
+              <path
+                d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"
+              ></path>
+              <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"></path>
+            </svg>
+            <h3 class="title">Mulai Sekarang</h3>
+          </div>
+
+          <p class="desc mb-6">
+            Kalau kamu:<br /><br />
+
+            Punya usaha<br />
+            Mau mulai dari Google<br />
+            Tapi masih bingung<br /><br />
+
+            👉 Ini langkah paling simpel:
+          </p>
+
+          <p class="text-sm text-yellow-400 mb-4">
+            ⚠️ Slot terbatas untuk bimbingan awal
+          </p>
+
+          <div class="flex flex-col md:flex-row gap-4">
+            <!-- CTA LIHAT CONTOH WEB -->
+            <a
+              href="https://carisolusi.biz.id/2/NEWS/35/bukti-nyata-website-baru-bisa-datangkan-customer-setiap-hari"
+              target="_blank"
+              class="w-full"
+            >
+              <button
+                class="w-full bg-blue-600 hover:bg-blue-500 px-6 py-4 rounded-xl font-semibold text-lg transition"
+              >
+                Lihat Hasil
+              </button>
+            </a>
+
+            <!-- CTA WHATSAPP -->
+            <a
+              href="https://wa.me/6281384072641?text=Halo%2C%20saya%20tertarik%20Web%20SEO%20Praktis%20(WSP).%20Boleh%20minta%20info%20harga%20promo%20dan%20cara%20mulainya%3F"
+              target="_blank"
+              class="w-full"
+            >
+              <button
+                class="w-full bg-amber-600 hover:bg-amber-500 px-6 py-4 rounded-xl font-semibold text-lg transition"
+              >
+                Konsultasi Gratis
+              </button>
+            </a>
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-4 mt-4">
+            <!-- CTA BELI -->
+            <a
+              href="https://lynk.id/vetabiz/x4pwpxkdkv68"
+              target="_blank"
+              class="w-full"
+            >
+              <button
+                class="w-full bg-green-600 hover:bg-green-500 px-6 py-4 rounded-xl font-semibold text-lg transition"
+              >
+                Saya Mau Lebih Banyak Customer Pakai WSP
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAV -->
+    <section class="max-w-4xl mx-auto px-6 pb-16 flex justify-between">
+      <button
+        id="prevBtn"
+        class="bg-slate-700 px-6 py-3 rounded-xl opacity-40 cursor-not-allowed"
+      >
+        ← Sebelumnya
+      </button>
+      <!-- <button
+        id="nextBtn"
+        onclick="nextDay()"
+        class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl cursor-not-allowed"
+        disabled
+      >
+        Next →
+      </button> -->
+      <a href="#hero">
+        <button
+          id="up"
+          class="bg-blue-500 hover:bg-blue-600 px-6 py-3 rounded-xl"
+        >
+          Kembali ke Atas
+        </button>
+      </a>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-16 text-center">
+      <h2 class="text-3xl font-bold mb-4">Mulai Digitalisasi Sekarang</h2>
+      <p class="text-gray-400 mb-6">Jangan tunggu besar untuk mulai online.</p>
+      <a href="https://carisolusi.biz.id/2/news" target="_blank">
+        <button
+          class="bg-green-700 hover:bg-green-600 px-8 py-3 rounded-xl font-semibold"
+        >
+          Baca Artikel Lainnya
+        </button>
+      </a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-8 border-t border-slate-700 text-gray-400">
+      © 2026 Copyright by Diamant Digital. All rights reserved.
+    </footer>
+
+    <script>
+      let unlockedDay = 7; // default hari ini (ubah manual)
+      function updateDayButtonsAccess() {
+        const buttons = document.querySelectorAll('.dayBtn');
+
+        buttons.forEach((btn, index) => {
+          const day = index + 1;
+
+          if (day <= unlockedDay) {
+            btn.disabled = false;
+            btn.classList.remove('opacity-40', 'cursor-not-allowed');
+          } else {
+            btn.disabled = true;
+            btn.classList.add('opacity-40', 'cursor-not-allowed');
+          }
+        });
+      }
+
+      function goToDay(day) {
+        if (day > unlockedDay) return; // ❌ blok akses
+
+        currentDay = day;
+        updateProgress();
+        renderContent();
+        updateActiveDayBtn();
+        window.scrollTo(0, 0);
+      }
+
+      updateDayButtonsAccess();
+
+      // const startDate = new Date('2026-04-07'); // hari mulai program
+      // const today = new Date();
+
+      // const diffTime = today - startDate;
+      // const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+
+      // let unlockedDay = Math.min(diffDays, totalDays);
+
+      lucide.createIcons();
+
+      let currentDay = 1;
+      const totalDays = 7;
+
+      const progressBar = document.getElementById('progressBar');
+      const dayLabel = document.getElementById('dayLabel');
+      const content = document.getElementById('content');
+      const prevBtn = document.getElementById('prevBtn');
+      const ctaFinal = document.getElementById('ctaFinal');
+
+      function goToDay(day) {
+        currentDay = day;
+        updateProgress();
+        renderContent();
+        updateActiveDayBtn();
+        window.scrollTo(0, 0);
+      }
+
+      function updateProgress() {
+        const progress = (currentDay / totalDays) * 100;
+        progressBar.style.width = progress + '%';
+        dayLabel.innerText = `Day ${currentDay} / ${totalDays}`;
+
+        // disable prev di day 1
+        if (currentDay === 1) {
+          prevBtn.classList.add('opacity-40', 'cursor-not-allowed');
+        } else {
+          prevBtn.classList.remove('opacity-40', 'cursor-not-allowed');
+        }
+        updateActiveDayBtn();
+      }
+
+      function updateActiveDayBtn() {
+        const buttons = document.querySelectorAll('.dayBtn');
+        buttons.forEach((btn, index) => {
+          btn.classList.remove('active');
+          if (index + 1 === currentDay) {
+            btn.classList.add('active');
+          }
+        });
+      }
+
+      function renderContent() {
+        if (currentDay === 1) {
+          content.innerHTML = day1Content;
+        } else if (currentDay === 2) {
+          content.innerHTML = day2Content;
+        } else if (currentDay === 3) {
+          content.innerHTML = day3Content;
+        } else if (currentDay === 4) {
+          content.innerHTML = day4Content;
+        } else if (currentDay === 5) {
+          content.innerHTML = day5Content;
+        } else if (currentDay === 6) {
+          content.innerHTML = day6Content;
+        } else if (currentDay === 7) {
+          content.innerHTML = day7Content;
+        }
+
+        // ✅ CONTROL CTA FINAL
+        if (currentDay === 7) {
+          ctaFinal.classList.remove('hidden');
+        } else {
+          ctaFinal.classList.add('hidden');
+        }
+
+        lucide.createIcons();
+        revealCards();
+      }
+
+      function nextDay() {
+        if (currentDay < totalDays) {
+          currentDay++;
+          updateProgress();
+          renderContent();
+          window.scrollTo(0, 0);
+        }
+      }
+
+      function prevDay() {
+        if (currentDay > 1) {
+          currentDay--;
+          updateProgress();
+          renderContent();
+          window.scrollTo(0, 0);
+        }
+      }
+
+      prevBtn.onclick = prevDay;
+
+      // =====================
+      // DAY 1 (EXISTING)
+      // =====================
+      const day1Content = content.innerHTML;
+
+      // =====================
+      // DAY 2 (NEW)
+      // =====================
+      const day2Content = `
+
+              <div class="card">
+                <div class="flex items-center gap-4 mb-6">
+                  <i data-lucide="alert-circle" class="icon"></i>
+                  <h3 class="title">Masalah Utama Pebisnis Offline</h3>
+                </div>
+                <p class="desc">
+                  Teman-teman, kita jujur ya…<br /><br />
+                  Kenapa banyak bisnis offline susah berkembang?
+                </p>
+              </div>
+
+              <div class="card">
+                <div class="flex items-center gap-4 mb-6">
+                  <i data-lucide="x-circle" class="icon"></i>
+                  <h3 class="title">Penyebab Utama</h3>
+                </div>
+                <p class="desc">
+                  ❌ Nunggu pelanggan datang<br />
+                  ❌ Promosi cuma dari mulut ke mulut<br />
+                  ❌ Tidak punya “aset digital”
+                </p>
+              </div>
+
+              <div class="card">
+                <div class="flex items-center gap-4 mb-6">
+                  <i data-lucide="trending-down" class="icon"></i>
+                  <h3 class="title">Dampaknya</h3>
+                </div>
+                <p class="desc">
+                  Sepi kalau tidak ada traffic<br />
+                  Tidak scalable<br />
+                  Kalah sama yang sudah online
+                </p>
+              </div>
+
+              <div class="card">
+                <div class="flex items-center gap-4 mb-6">
+                  <i data-lucide="git-compare" class="icon"></i>
+                  <h3 class="title">Contoh Nyata</h3>
+                </div>
+                <p class="desc">
+                  Ada 2 tukang service AC:<br /><br />
+                  Tidak punya online presence<br />
+                  Punya website + muncul di Google<br /><br />
+                  👉 Yang mana lebih sering dapat pelanggan?
+                </p>
+              </div>
+
+              <div class="card">
+                <div class="flex items-center gap-4 mb-6">
+                  <i data-lucide="target" class="icon"></i>
+                  <h3 class="title">Insight</h3>
+                </div>
+                <p class="desc">
+                  Kalau mau naik level:<br />
+                  ➡️ Harus punya “mesin pencari pelanggan”
+                </p>
+              </div>
+
+              <div class="card">
+              <div class="flex items-center gap-4 mb-6">
+                <i data-lucide="clock" class="icon"></i>
+                <h3 class="title">Masalah: Bergantung Waktu & Lokasi</h3>
+              </div>
+              <p class="desc">
+                Bisnis offline hanya jalan saat:<br />
+                Toko buka<br />
+                Orang lewat<br /><br />
+
+                Di luar itu?<br />
+                ➡️ Tidak ada pelanggan<br /><br />
+
+                Artinya:<br />
+                Kamu kehilangan banyak potensi pembeli setiap hari
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="flex items-center gap-4 mb-6">
+                <i data-lucide="users-2" class="icon"></i>
+                <h3 class="title">Masalah: Pasar Terbatas</h3>
+              </div>
+              <p class="desc">
+                Offline = hanya orang sekitar<br /><br />
+
+                Padahal:<br />
+                Banyak orang di luar sana butuh jasa kamu<br /><br />
+
+                Tapi karena tidak online:<br />
+                ➡️ Mereka tidak pernah tahu kamu ada
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="flex items-center gap-4 mb-6">
+                <i data-lucide="alert-octagon" class="icon"></i>
+                <h3 class="title">Masalah: Tidak Punya Kontrol Traffic</h3>
+              </div>
+              <p class="desc">
+                Kamu tidak bisa mengatur:<br />
+                Hari ini ramai atau sepi<br /><br />
+
+                Semua tergantung:<br />
+                Keberuntungan<br />
+                Orang lewat<br /><br />
+
+                ➡️ Ini berbahaya untuk jangka panjang
+              </p>
+            </div>
+
+            <div class="card">
+              <div class="flex items-center gap-4 mb-6">
+                <i data-lucide="trending-up" class="icon"></i>
+                <h3 class="title">Kesimpulan Besar Day 2</h3>
+              </div>
+              <p class="desc">
+                Masalah utama bukan di produk<br />
+                Tapi di sistem mendapatkan pelanggan<br /><br />
+
+                Kalau sistemnya tidak ada:<br />
+                ➡️ Bisnis akan stuck<br /><br />
+
+                📌 Solusi ke depan:<br />
+                Kita butuh sistem yang bisa datangkan pelanggan secara konsisten
+              </p>
+            </div>
+              `;
+      // =====================
+      // DAY 3
+      // =====================
+      const day3Content = `<div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="activity" class="icon"></i>
+          <h3 class="title">Kenalan dengan Traffic</h3>
+        </div>
+        <p class="desc">
+          Hari ini kita bahas hal paling penting di bisnis digital:<br /><br />
+          👉 Traffic<br /><br />
+          Sederhananya:<br />
+          Traffic = orang yang datang ke bisnis kita
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="users" class="icon"></i>
+          <h3 class="title">Kenapa Traffic Itu Penting?</h3>
+        </div>
+        <p class="desc">
+          Tidak ada traffic = tidak ada pelanggan<br /><br />
+          Mau produk sebagus apapun:<br />
+          ➡️ Kalau tidak ada yang lihat, tidak akan laku
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="git-branch" class="icon"></i>
+          <h3 class="title">3 Sumber Traffic</h3>
+        </div>
+        <p class="desc">
+          Ada 3 sumber utama:<br /><br />
+          1. Offline<br />
+          2. Sosial Media<br />
+          3. Google<br /><br />
+
+          Kita bahas satu-satu
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="map-pin" class="icon"></i>
+          <h3 class="title">Traffic Offline</h3>
+        </div>
+        <p class="desc">
+          Contoh:<br />
+          Orang lewat depan toko<br />
+          Spanduk<br />
+          Rekomendasi<br /><br />
+
+          ❗ Kelemahan:<br />
+          Terbatas lokasi<br />
+          Tidak konsisten
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="instagram" class="icon"></i>
+          <h3 class="title">Traffic Sosial Media</h3>
+        </div>
+        <p class="desc">
+          Contoh:<br />
+          IG, TikTok, Facebook<br /><br />
+
+          Kelebihan:<br />
+          Bisa viral<br /><br />
+
+          ❗ Kekurangan:<br />
+          Harus konsisten bikin konten<br />
+          Belum tentu siap beli
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="search" class="icon"></i>
+          <h3 class="title">Traffic Google (Paling Powerful)</h3>
+        </div>
+        <p class="desc">
+          Ini yang paling penting 🔥<br /><br />
+
+          Orang buka Google karena:<br />
+          ➡️ Sudah butuh<br />
+          ➡️ Tinggal cari<br />
+          ➡️ Tinggal pilih
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="zap" class="icon"></i>
+          <h3 class="title">Kenapa Google Lebih Kuat?</h3>
+        </div>
+        <p class="desc">
+          Di Google:<br /><br />
+          ❌ Bukan scroll iseng<br />
+          ✅ Tapi cari solusi<br /><br />
+
+          Artinya:<br />
+          Peluang closing jauh lebih tinggi
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="message-square" class="icon"></i>
+          <h3 class="title">Contoh Nyata</h3>
+        </div>
+        <p class="desc">
+          Orang ketik:<br /><br />
+          “service kulkas sukabumi”<br /><br />
+
+          Itu artinya:<br />
+          ➡️ Kulkas rusak<br />
+          ➡️ Butuh cepat<br />
+          ➡️ Siap bayar
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="target" class="icon"></i>
+          <h3 class="title">Insight Utama Day 3</h3>
+        </div>
+        <p class="desc">
+          Semua bisnis butuh traffic<br /><br />
+
+          Tapi:<br />
+          Tidak semua traffic punya kualitas sama<br /><br />
+
+          📌 Traffic Google = paling siap jadi pelanggan
+        </p>
+      </div>
+
+      `;
+
+      // =====================
+      // DAY 4
+      // =====================
+
+      const day4Content = `
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="layout" class="icon"></i>
+          <h3 class="title">Kenapa Harus Punya Website?</h3>
+        </div>
+        <p class="desc">
+          Teman-teman, banyak yang mikir:<br /><br />
+          “Jualan cukup di WA / IG aja”<br /><br />
+          Padahal… itu belum cukup untuk scale bisnis
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="alert-circle" class="icon"></i>
+          <h3 class="title">Masalah Jualan Hanya di WA / IG</h3>
+        </div>
+        <p class="desc">
+          WA:<br />
+          ❌ Tidak bisa dicari di Google<br /><br />
+
+          IG / TikTok:<br />
+          ❌ Harus terus upload konten<br />
+          ❌ Tidak stabil<br /><br />
+
+          ➡️ Artinya: tidak punya sistem jangka panjang
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="globe" class="icon"></i>
+          <h3 class="title">Website = Rumah Digital</h3>
+        </div>
+        <p class="desc">
+          Website itu seperti:<br /><br />
+          🏠 Toko / kantor di internet<br /><br />
+
+          Bedanya:<br />
+          ➡️ Bisa diakses 24 jam<br />
+          ➡️ Bisa ditemukan dari Google
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="search" class="icon"></i>
+          <h3 class="title">Peran Website di Google</h3>
+        </div>
+        <p class="desc">
+          Google butuh “halaman” untuk ditampilkan<br /><br />
+
+          ➡️ Website = yang muncul di Google<br /><br />
+
+          Tanpa website:<br />
+          ❌ Kamu tidak punya tempat untuk tampil
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="check-circle" class="icon"></i>
+          <h3 class="title">Fungsi Utama Website</h3>
+        </div>
+        <p class="desc">
+          ✅ Muncul di Google<br />
+          ✅ Menjelaskan produk/jasa<br />
+          ✅ Menampilkan foto & testimoni<br />
+          ✅ Mengarahkan ke WhatsApp<br /><br />
+
+          ➡️ Semua jadi lebih profesional
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="shield-check" class="icon"></i>
+          <h3 class="title">Website Meningkatkan Trust</h3>
+        </div>
+        <p class="desc">
+          Kalau customer lihat:<br />
+          Ada website<br />
+          Ada informasi jelas<br /><br />
+
+          ➡️ Mereka lebih percaya<br /><br />
+
+          Dibanding:<br />
+          Akun tanpa identitas jelas
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="clock" class="icon"></i>
+          <h3 class="title">Website Bekerja 24 Jam</h3>
+        </div>
+        <p class="desc">
+          Bahkan saat kamu tidur:<br /><br />
+          Website tetap bisa:<br />
+          ➡️ Ditemukan di Google<br />
+          ➡️ Dibaca calon customer<br />
+          ➡️ Menghasilkan chat masuk
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="cpu" class="icon"></i>
+          <h3 class="title">Website = Mesin Traffic</h3>
+        </div>
+        <p class="desc">
+          Website bukan sekadar tampilan<br /><br />
+
+          Tapi:<br />
+          ➡️ Mesin untuk menarik pengunjung<br />
+          ➡️ Mesin untuk menghasilkan pelanggan<br /><br />
+
+          Kalau dioptimasi dengan benar
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="target" class="icon"></i>
+          <h3 class="title">Insight Utama Day 4</h3>
+        </div>
+        <p class="desc">
+          Kalau mau dapat pelanggan dari Google:<br /><br />
+
+          ➡️ Harus punya website<br /><br />
+
+          Tanpa itu:<br />
+          Kamu tidak ikut dalam permainan
+        </p>
+      </div>
+      `;
+
+      // =====================
+      // DAY 5
+      // =====================
+
+      const day5Content = `
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="help-circle" class="icon"></i>
+          <h3 class="title">Kenapa Banyak Orang Tidak Mulai?</h3>
+        </div>
+        <p class="desc">
+          Sampai sini mungkin kamu sudah paham:<br />
+          Digital itu penting<br /><br />
+
+          Tapi pertanyaannya:<br />
+          Kenapa masih banyak yang tidak mulai?
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="code" class="icon"></i>
+          <h3 class="title">Objection 1: Tidak Bisa Coding</h3>
+        </div>
+        <p class="desc">
+          Banyak yang berpikir:<br />
+          “Saya gaptek”<br />
+          “Saya tidak bisa bikin website”<br /><br />
+
+          ➡️ Akhirnya tidak mulai sama sekali
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="search-x" class="icon"></i>
+          <h3 class="title">Objection 2: Tidak Mengerti SEO</h3>
+        </div>
+        <p class="desc">
+          SEO terdengar rumit:<br />
+          Banyak istilah teknis<br /><br />
+
+          ➡️ Jadi takut duluan<br />
+          ➡️ Padahal belum coba
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="wallet" class="icon"></i>
+          <h3 class="title">Objection 3: Takut Mahal</h3>
+        </div>
+        <p class="desc">
+          Banyak yang mikir:<br />
+          “Bikin website mahal”<br /><br />
+
+          ➡️ Akhirnya ditunda terus<br /><br />
+
+          Padahal:<br />
+          Tidak harus mahal untuk mulai
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="map" class="icon"></i>
+          <h3 class="title">Objection 4: Bingung Mulai Dari Mana</h3>
+        </div>
+        <p class="desc">
+          Ini yang paling sering terjadi:<br /><br />
+
+          Mau mulai… tapi:<br />
+          Tidak tahu langkah pertama<br /><br />
+
+          ➡️ Akhirnya tidak jalan sama sekali
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="pause-circle" class="icon"></i>
+          <h3 class="title">Akhirnya Terjebak di Zona Nyaman</h3>
+        </div>
+        <p class="desc">
+          Karena semua alasan tadi:<br /><br />
+
+          ➡️ Niat doang<br />
+          ➡️ Tidak action<br /><br />
+
+          Dan bisnis tetap di situ-situ saja
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="alert-triangle" class="icon"></i>
+          <h3 class="title">Bahaya Kalau Tidak Mulai Sekarang</h3>
+        </div>
+        <p class="desc">
+          Sementara kamu diam:<br /><br />
+
+          ➡️ Kompetitor sudah online<br />
+          ➡️ Sudah muncul di Google<br />
+          ➡️ Sudah ambil pelanggan kamu<br /><br />
+
+          Ini realita sekarang
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="zap" class="icon"></i>
+          <h3 class="title">Mindset yang Harus Diubah</h3>
+        </div>
+        <p class="desc">
+          Di digital:<br /><br />
+
+          ❌ Bukan yang paling pintar yang menang<br />
+          ✅ Tapi yang paling cepat mulai<br /><br />
+
+          Action kecil > rencana besar
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="target" class="icon"></i>
+          <h3 class="title">Insight Utama Day 5</h3>
+        </div>
+        <p class="desc">
+          Hambatan terbesar bukan di luar<br />
+          Tapi di kepala sendiri<br /><br />
+
+          Kalau mau maju:<br />
+          ➡️ Mulai dulu, belajar sambil jalan
+        </p>
+      </div>
+
+      `;
+
+      // =====================
+      // DAY 6
+      // =====================
+
+      const day6Content = `
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="tool" class="icon"></i>
+          <h3 class="title">Solusi Praktis untuk Mulai</h3>
+        </div>
+        <p class="desc">
+          Sampai sini kita sudah tahu:<br /><br />
+
+          ✔️ Harus punya traffic<br />
+          ✔️ Harus punya website<br />
+          ✔️ Tidak bisa terus offline<br /><br />
+
+          Sekarang pertanyaannya:<br />
+          👉 Mulainya pakai apa?
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="cpu" class="icon"></i>
+          <h3 class="title">Kenalan dengan Web SEO Praktis (WSP)</h3>
+        </div>
+        <p class="desc">
+          Di komunitas ini kita pakai:<br /><br />
+
+          🔧 Web SEO Praktis (WSP)<br /><br />
+
+          Ini bukan sekadar website biasa<br />
+          Tapi website yang sudah disiapkan untuk cari pelanggan
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="alert-circle" class="icon"></i>
+          <h3 class="title">Kenapa WSP Dibuat?</h3>
+        </div>
+        <p class="desc">
+          Karena banyak pebisnis stuck di:<br /><br />
+
+          ❌ Tidak bisa coding<br />
+          ❌ Tidak ngerti SEO<br />
+          ❌ Bingung mulai<br /><br />
+
+          ➡️ Jadi dibuat solusi yang simpel
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="settings" class="icon"></i>
+          <h3 class="title">Cara Kerja WSP (Simple)</h3>
+        </div>
+        <p class="desc">
+          Kamu cukup:<br /><br />
+
+          Isi data usaha<br />
+          Upload foto<br />
+          Pasang WhatsApp<br /><br />
+
+          👉 Website langsung jadi
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="check-circle" class="icon"></i>
+          <h3 class="title">Keunggulan WSP</h3>
+        </div>
+        <p class="desc">
+          ✅ Tidak perlu coding<br />
+          ✅ Sudah siap SEO dasar<br />
+          ✅ Bisa langsung dipakai jualan<br />
+          ✅ Cocok untuk pemula<br /><br />
+
+          ➡️ Tinggal pakai, bukan belajar dari nol
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="zap" class="icon"></i>
+          <h3 class="title">Bukan Sekadar Website</h3>
+        </div>
+        <p class="desc">
+          WSP bukan cuma tampilan<br /><br />
+
+          Tapi:<br />
+          ➡️ Alat untuk datangkan traffic<br />
+          ➡️ Alat untuk dapat pelanggan<br /><br />
+
+          Ini yang membedakan
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="clock" class="icon"></i>
+          <h3 class="title">Mulai Lebih Cepat</h3>
+        </div>
+        <p class="desc">
+          Dibanding bikin dari nol:<br /><br />
+
+          ❌ Butuh waktu lama<br />
+          ❌ Banyak trial error<br /><br />
+
+          Dengan WSP:<br />
+          ➡️ Bisa langsung jalan lebih cepat
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="users" class="icon"></i>
+          <h3 class="title">Cocok Untuk Siapa?</h3>
+        </div>
+        <p class="desc">
+          Cocok untuk:<br /><br />
+
+          ✔️ Pemula<br />
+          ✔️ Pebisnis offline<br />
+          ✔️ Yang mau mulai digital<br /><br />
+
+          ➡️ Tanpa ribet teknis
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="target" class="icon"></i>
+          <h3 class="title">Insight Day 6</h3>
+        </div>
+        <p class="desc">
+          Yang penting bukan tools paling canggih<br /><br />
+
+          Tapi:<br />
+          ➡️ Tools yang bikin kamu mulai<br /><br />
+
+          WSP dibuat untuk itu
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="message-circle" class="icon"></i>
+          <h3 class="title">Mulai Sekarang</h3>
+        </div>
+        <p class="desc">
+          Kalau kamu:<br /><br />
+
+          Punya usaha<br />
+          Mau mulai dari Google<br />
+          Tapi bingung mulai<br /><br />
+
+          👉 Bisa diskusi di grup ini<br />
+          👉 Atau japri saya<br /><br />
+
+          Nanti saya bantu arahkan step awalnya
+        </p>
+      </div>
+
+      `;
+
+      // =====================
+      // DAY 7
+      // =====================
+
+      const day7Content = `
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="flag" class="icon"></i>
+          <h3 class="title">Kita Sampai di Titik Ini</h3>
+        </div>
+        <p class="desc">
+          Dari Day 1 sampai sekarang:<br /><br />
+
+          Kamu sudah tahu:<br />
+          ✔️ Pentingnya digital<br />
+          ✔️ Masalah bisnis offline<br />
+          ✔️ Pentingnya traffic<br />
+          ✔️ Peran website<br />
+          ✔️ Cara mulai tanpa ribet<br /><br />
+
+          Sekarang tinggal 1 hal:<br />
+          👉 ACTION
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="list-checks" class="icon"></i>
+          <h3 class="title">Step 1 — Siapkan Data</h3>
+        </div>
+        <p class="desc">
+          Mulai dari yang simpel dulu:<br /><br />
+
+          Nama usaha<br />
+          Produk / jasa<br />
+          Area target (misal: Sukabumi)<br /><br />
+
+          Tidak perlu sempurna
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="image" class="icon"></i>
+          <h3 class="title">Step 2 — Siapkan Konten</h3>
+        </div>
+        <p class="desc">
+          Yang penting ada dulu:<br /><br />
+
+          Foto produk<br />
+          Deskripsi sederhana<br />
+          Testimoni (kalau ada)<br /><br />
+
+          ➡️ Tidak harus bagus, yang penting ada
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="rocket" class="icon"></i>
+          <h3 class="title">Step 3 — Mulai Online</h3>
+        </div>
+        <p class="desc">
+          Gunakan tools yang simpel<br /><br />
+
+          👉 Seperti WSP<br /><br />
+
+          Fokus dulu:<br />
+          ➡️ Punya website<br />
+          ➡️ Bisa muncul di Google
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="target" class="icon"></i>
+          <h3 class="title">Target Awal</h3>
+        </div>
+        <p class="desc">
+          Jangan langsung mikir besar<br /><br />
+
+          Target awal:<br />
+          ➡️ Mulai muncul di Google<br /><br />
+
+          Dari situ:<br />
+          Pelan-pelan akan berkembang
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="trending-up" class="icon"></i>
+          <h3 class="title">Kalau Konsisten...</h3>
+        </div>
+        <p class="desc">
+          Kalau kamu jalanin ini:<br /><br />
+
+          ➡️ Traffic akan masuk<br />
+          ➡️ Chat akan datang<br />
+          ➡️ Pelanggan bertambah<br /><br />
+
+          Ini bukan teori, ini realita
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="alert-circle" class="icon"></i>
+          <h3 class="title">Yang Harus Kamu Hindari</h3>
+        </div>
+        <p class="desc">
+          ❌ Nunggu sempurna<br />
+          ❌ Kebanyakan mikir<br />
+          ❌ Tidak mulai<br /><br />
+
+          ➡️ Itu yang bikin stuck
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="zap" class="icon"></i>
+          <h3 class="title">Mindset Terakhir</h3>
+        </div>
+        <p class="desc">
+          Di era sekarang:<br /><br />
+
+          ➡️ Yang terlihat = yang dapat pelanggan<br /><br />
+
+          Mulai kecil tidak masalah<br />
+          Yang penting mulai
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="flex items-center gap-4 mb-6">
+          <i data-lucide="message-circle" class="icon"></i>
+          <h3 class="title">Call To Action</h3>
+        </div>
+        <p class="desc">
+          Kalau kamu:<br /><br />
+
+          Punya usaha<br />
+          Mau mulai dari Google<br />
+          Tapi masih bingung<br /><br />
+
+          👉 Bisa diskusi di grup ini<br />
+          👉 Atau japri saya<br /><br />
+
+          Saya bantu arahkan step awalnya
+        </p>
+      </div>
+
+      `;
+
+      // =====================
+      // ANIMATION
+      // =====================
+      function revealCards() {
+        const cards = document.querySelectorAll('.card');
+        const triggerBottom = window.innerHeight * 0.85;
+
+        cards.forEach((card) => {
+          const cardTop = card.getBoundingClientRect().top;
+
+          if (cardTop < triggerBottom) {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }
+        });
+      }
+
+      window.addEventListener('scroll', revealCards);
+      window.addEventListener('load', revealCards);
+
+      updateProgress();
+    </script>
+  </body>
+</html>
