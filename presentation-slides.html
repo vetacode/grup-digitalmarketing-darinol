@@ -4,15 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Presentasi Modern - Rumus Simpel Mendapatkan Cuan</title>
-    <link
-      rel="preconnect"
-      href="https://fonts.googleapis.com"
-    />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -39,50 +32,132 @@
         box-sizing: border-box;
       }
 
-      html {
-        scroll-behavior: smooth;
+      html,
+      body {
+        height: 100%;
       }
 
       body {
         margin: 0;
-        font-family: "Plus Jakarta Sans", sans-serif;
+        overflow: hidden;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         background:
-          radial-gradient(circle at top, rgba(94, 234, 212, 0.16), transparent 28%),
+          radial-gradient(
+            circle at top,
+            rgba(94, 234, 212, 0.16),
+            transparent 28%
+          ),
           linear-gradient(180deg, #041019 0%, #081722 100%);
         color: var(--text);
       }
 
-      .deck {
+      .presentation-shell {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .progress-wrap {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
+        z-index: 20;
+        padding: 20px 24px 0;
+      }
+
+      .progress-track {
+        width: min(1100px, 100%);
+        height: 10px;
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.25);
+      }
+
+      .progress-bar {
+        width: 16.66%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          var(--accent),
+          var(--accent-3),
+          var(--accent-2)
+        );
+        box-shadow: 0 0 18px rgba(94, 234, 212, 0.55);
+        transition: width 0.35s ease;
+      }
+
+      .slide-counter {
+        width: min(1100px, 100%);
+        margin: 10px auto 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: rgba(236, 247, 255, 0.82);
+        font-size: 0.9rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .deck {
+        position: relative;
+        width: 100%;
+        height: 100vh;
       }
 
       .slide {
-        min-height: 100vh;
+        position: absolute;
+        inset: 0;
         display: grid;
         align-items: center;
-        position: relative;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(50px) scale(0.98);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease,
+          visibility 0.45s ease;
         overflow: hidden;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0) scale(1);
+        z-index: 2;
       }
 
       .slide::before {
-        content: "";
+        content: '';
         position: absolute;
         inset: 0;
         background:
-          linear-gradient(115deg, rgba(3, 10, 18, 0.92) 15%, rgba(3, 10, 18, 0.62) 55%, rgba(3, 10, 18, 0.82) 100%),
+          linear-gradient(
+            115deg,
+            rgba(3, 10, 18, 0.92) 15%,
+            rgba(3, 10, 18, 0.62) 55%,
+            rgba(3, 10, 18, 0.82) 100%
+          ),
           var(--bg-image) center/cover no-repeat;
         transform: scale(1.04);
       }
 
       .slide::after {
-        content: "";
+        content: '';
         position: absolute;
         inset: auto -10% -30% auto;
         width: 30rem;
         height: 30rem;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(94, 234, 212, 0.16), transparent 68%);
+        background: radial-gradient(
+          circle,
+          rgba(94, 234, 212, 0.16),
+          transparent 68%
+        );
         pointer-events: none;
       }
 
@@ -91,7 +166,7 @@
         margin: 0 auto;
         position: relative;
         z-index: 1;
-        padding: 48px 0;
+        padding: 92px 0 110px;
       }
 
       .panel {
@@ -159,6 +234,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .triple-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
       .metric-card,
       .idea-card,
       .step-card,
@@ -209,10 +288,6 @@
         margin-top: 4px;
       }
 
-      .triple-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
       .idea-card h3,
       .step-card h3 {
         font-size: 1.15rem;
@@ -222,7 +297,8 @@
       .idea-card p,
       .step-card p,
       .metric-card p,
-      .quote-card p {
+      .quote-card p,
+      .cta-box p {
         color: var(--muted);
         line-height: 1.7;
         margin-bottom: 0;
@@ -269,7 +345,11 @@
       .cta-box {
         padding: 28px;
         border-radius: 24px;
-        background: linear-gradient(145deg, rgba(94, 234, 212, 0.18), rgba(96, 165, 250, 0.14));
+        background: linear-gradient(
+          145deg,
+          rgba(94, 234, 212, 0.18),
+          rgba(96, 165, 250, 0.14)
+        );
         border: 1px solid rgba(255, 255, 255, 0.14);
       }
 
@@ -281,12 +361,17 @@
       }
 
       .btn-main,
-      .btn-alt {
+      .btn-alt,
+      .nav-btn {
         padding: 14px 22px;
         border-radius: 999px;
         text-decoration: none;
         font-weight: 700;
-        transition: transform 0.2s ease, opacity 0.2s ease;
+        transition:
+          transform 0.2s ease,
+          opacity 0.2s ease,
+          background 0.2s ease,
+          border-color 0.2s ease;
       }
 
       .btn-main {
@@ -294,16 +379,24 @@
         color: #072032;
       }
 
-      .btn-alt {
+      .btn-alt,
+      .nav-btn {
         background: transparent;
         color: #ffffff;
         border: 1px solid rgba(255, 255, 255, 0.22);
       }
 
       .btn-main:hover,
-      .btn-alt:hover {
+      .btn-alt:hover,
+      .nav-btn:hover {
         transform: translateY(-2px);
-        opacity: 0.92;
+        opacity: 0.94;
+      }
+
+      .nav-btn[disabled] {
+        opacity: 0.35;
+        cursor: not-allowed;
+        transform: none;
       }
 
       .mini-note {
@@ -312,22 +405,45 @@
         font-size: 0.95rem;
       }
 
-      .slide-nav {
+      .controls {
         position: fixed;
-        right: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        z-index: 5;
-        display: grid;
-        gap: 10px;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        z-index: 20;
+        width: min(1100px, calc(100% - 24px));
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
       }
 
-      .slide-nav a {
-        width: 12px;
-        height: 12px;
+      .dots {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 14px;
+        border-radius: 999px;
+        background: rgba(7, 20, 31, 0.62);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(12px);
+      }
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border: 0;
         border-radius: 50%;
         background: rgba(255, 255, 255, 0.24);
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        cursor: pointer;
+        transition:
+          transform 0.2s ease,
+          background 0.2s ease;
+      }
+
+      .dot.active {
+        background: linear-gradient(90deg, var(--accent), var(--accent-3));
+        transform: scale(1.3);
       }
 
       @media (max-width: 900px) {
@@ -340,302 +456,443 @@
 
         .content {
           width: min(100% - 24px, 1120px);
+          padding: 92px 0 130px;
         }
 
         .panel {
           padding: 22px;
           border-radius: 22px;
+          max-height: calc(100vh - 230px);
+          overflow: auto;
         }
 
-        .slide-nav {
-          display: none;
+        .controls {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+
+        .slide-counter {
+          font-size: 0.78rem;
+          gap: 12px;
         }
       }
     </style>
   </head>
   <body>
-    <nav class="slide-nav" aria-label="Navigasi slide">
-      <a href="#slide-1" aria-label="Slide 1"></a>
-      <a href="#slide-2" aria-label="Slide 2"></a>
-      <a href="#slide-3" aria-label="Slide 3"></a>
-      <a href="#slide-4" aria-label="Slide 4"></a>
-      <a href="#slide-5" aria-label="Slide 5"></a>
-      <a href="#slide-6" aria-label="Slide 6"></a>
-    </nav>
-
-    <main class="deck">
-      <section
-        class="slide"
-        id="slide-1"
-        style="--bg-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80');"
-      >
-        <div class="content">
-          <div class="panel hero-grid">
-            <div>
-              <div class="eyebrow">
-                <i class="fa-solid fa-chart-line"></i>
-                Presentasi Strategi Cuan
-              </div>
-              <h1>Rumus Simpel Mendapatkan Cuan di Era Digital</h1>
-              <p class="lead">
-                Bisnis kecil, UMKM, jasa, kelas, dan personal brand bisa tumbuh
-                lebih cepat kalau fondasinya jelas: apa yang dijual, siapa yang
-                dituju, dan bagaimana terlihat setiap hari.
-              </p>
-            </div>
-            <div class="metric-card">
-              <p class="eyebrow">Rumus Utama</p>
-              <p class="formula">
-                <span>Produk</span> × <span>Market</span> ×
-                <span>Publikasi</span>
-              </p>
-              <ul class="list">
-                <li>
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Kalau salah satu nol, hasil penjualan ikut turun.</span>
-                </li>
-                <li>
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Tujuannya bukan viral dulu, tapi sistem penjualan yang konsisten.</span>
-                </li>
-                <li>
-                  <i class="fa-solid fa-circle-check"></i>
-                  <span>Strategi ini cocok untuk bisnis lokal maupun online.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <div class="presentation-shell">
+      <header class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-bar" id="progressBar"></div>
         </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-2"
-        style="--bg-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');"
-      >
-        <div class="content">
-          <div class="panel split-grid">
-            <div>
-              <div class="eyebrow">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-                Masalah Umum
-              </div>
-              <h2>Kenapa Jualan Sering Macet?</h2>
-              <p class="lead">
-                Banyak orang rajin posting, tapi belum punya struktur. Akibatnya
-                promosi terasa capek, hasilnya tidak stabil, dan pembeli datang
-                hanya sesekali.
-              </p>
-            </div>
-            <div class="quote-card">
-              <ul class="list">
-                <li>
-                  <i class="fa-solid fa-xmark"></i>
-                  <span>Produknya ada, tapi manfaatnya belum jelas di mata calon pembeli.</span>
-                </li>
-                <li>
-                  <i class="fa-solid fa-xmark"></i>
-                  <span>Kontennya ramai, tapi tidak diarahkan ke market yang tepat.</span>
-                </li>
-                <li>
-                  <i class="fa-solid fa-xmark"></i>
-                  <span>Sudah punya audience, tapi jarang follow up dan jarang membuat penawaran.</span>
-                </li>
-                <li>
-                  <i class="fa-solid fa-xmark"></i>
-                  <span>Tidak ada alur dari perhatian, minat, sampai closing.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+        <div class="slide-counter">
+          <span id="slideLabel">Slide 1</span>
+          <span id="slideCount">1 / 6</span>
         </div>
-      </section>
+      </header>
 
-      <section
-        class="slide"
-        id="slide-3"
-        style="--bg-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=80');"
-      >
-        <div class="content">
-          <div class="panel">
-            <div class="eyebrow">
-              <i class="fa-solid fa-box-open"></i>
-              Pilar Pertama
-            </div>
-            <h2>Produk: Jual Solusi, Bukan Sekadar Barang</h2>
-            <div class="triple-grid">
-              <article class="idea-card">
-                <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
-                <h3>Perjelas Value</h3>
-                <p>
-                  Tulis manfaat utama produk dalam satu kalimat sederhana: membantu
-                  siapa, menyelesaikan masalah apa, dan hasil apa yang didapat.
-                </p>
-              </article>
-              <article class="idea-card">
-                <div class="icon"><i class="fa-solid fa-layer-group"></i></div>
-                <h3>Buat Level Penawaran</h3>
-                <p>
-                  Siapkan opsi pemula, utama, dan premium supaya market punya
-                  jalur masuk sesuai kebutuhan dan budget.
-                </p>
-              </article>
-              <article class="idea-card">
-                <div class="icon"><i class="fa-solid fa-comments-dollar"></i></div>
-                <h3>Siapkan Script Jualan</h3>
-                <p>
-                  Gunakan kalimat penawaran singkat untuk status WA, caption,
-                  landing page, dan chat follow up.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-4"
-        style="--bg-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80');"
-      >
-        <div class="content">
-          <div class="panel">
-            <div class="eyebrow">
-              <i class="fa-solid fa-users"></i>
-              Pilar Kedua
-            </div>
-            <h2>Market: Kenali Siapa yang Siap Membeli</h2>
-            <div class="triple-grid">
-              <article class="idea-card">
-                <div class="icon"><i class="fa-solid fa-user-tag"></i></div>
-                <h3>Segmentasi Sederhana</h3>
-                <p>
-                  Kelompokkan market berdasarkan kebutuhan: baru kenal, pernah
-                  tanya, pernah beli, dan siap repeat order.
-                </p>
-              </article>
-              <article class="idea-card">
-                <div class="icon"><i class="fa-solid fa-database"></i></div>
-                <h3>Bangun Database</h3>
-                <p>
-                  Simpan kontak dari WhatsApp, form website, Instagram, komunitas,
-                  dan pelanggan lama untuk dijaga rutin.
-                </p>
-              </article>
-              <article class="idea-card">
-                <div class="icon"><i class="fa-solid fa-handshake-angle"></i></div>
-                <h3>Rawat Relasi</h3>
-                <p>
-                  Jangan hanya datang saat jualan. Bangun trust lewat edukasi,
-                  testimoni, update manfaat, dan follow up personal.
-                </p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section
-        class="slide"
-        id="slide-5"
-        style="--bg-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80');"
-      >
-        <div class="content">
-          <div class="panel split-grid">
-            <div>
-              <div class="eyebrow">
-                <i class="fa-solid fa-bullhorn"></i>
-                Pilar Ketiga
-              </div>
-              <h2>Publikasi: Tampil Konsisten di Titik yang Tepat</h2>
-              <p class="lead">
-                Publikasi bukan cuma posting ramai. Fokusnya adalah membuat market
-                melihat penawaran yang jelas, berulang, dan mudah direspons.
-              </p>
-              <div class="steps">
-                <div class="step-card">
-                  <div class="step-number">Step 01</div>
-                  <h3>Konten Edukasi</h3>
-                  <p>Bangun perhatian dengan masalah, tips, dan insight yang relevan.</p>
+      <main class="deck" id="deck">
+        <section
+          class="slide active"
+          id="slide-1"
+          data-title="Pembuka"
+          style="
+            --bg-image: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="content">
+            <div class="panel hero-grid">
+              <div>
+                <div class="eyebrow">
+                  <i class="fa-solid fa-chart-line"></i>
+                  Presentasi Strategi Cuan
                 </div>
-                <div class="step-card">
-                  <div class="step-number">Step 02</div>
-                  <h3>Konten Penawaran</h3>
-                  <p>Tampilkan solusi, paket, bonus, testimoni, dan CTA yang tegas.</p>
-                </div>
-                <div class="step-card">
-                  <div class="step-number">Step 03</div>
-                  <h3>Konten Konversi</h3>
-                  <p>Arahkan ke WhatsApp, website, form, atau landing page untuk closing.</p>
-                </div>
+                <h1>Rumus Simpel Mendapatkan Cuan di Era Digital</h1>
+                <p class="lead">
+                  Bisnis kecil, UMKM, jasa, kelas, dan personal brand bisa
+                  tumbuh lebih cepat kalau fondasinya jelas: apa yang dijual,
+                  siapa yang dituju, dan bagaimana terlihat setiap hari.
+                </p>
+              </div>
+              <div class="metric-card">
+                <p class="eyebrow">Rumus Utama</p>
+                <p class="formula">
+                  <span>Produk</span> × <span>Market</span> ×
+                  <span>Publikasi</span>
+                </p>
+                <ul class="list">
+                  <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span
+                      >Kalau salah satu nol, hasil penjualan ikut turun.</span
+                    >
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span
+                      >Tujuannya bukan viral dulu, tapi sistem penjualan yang
+                      konsisten.</span
+                    >
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <span
+                      >Strategi ini cocok untuk bisnis lokal maupun
+                      online.</span
+                    >
+                  </li>
+                </ul>
               </div>
             </div>
-            <div class="quote-card">
-              <p class="quote-text">
-                "Punya orangnya, kasih penawaran, lalu ulangi dengan sistem yang
-                rapi."
-              </p>
-              <p class="mini-note">
-                Kanal yang bisa dipakai: WhatsApp, website, SEO, Google Business
-                Profile, Instagram, TikTok, komunitas, dan relasi offline.
-              </p>
-            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section
-        class="slide"
-        id="slide-6"
-        style="--bg-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80');"
-      >
-        <div class="content">
-          <div class="panel cta-grid">
-            <div>
-              <div class="eyebrow">
-                <i class="fa-solid fa-rocket"></i>
-                Aksi Penutup
+        <section
+          class="slide"
+          id="slide-2"
+          data-title="Masalah Umum"
+          style="
+            --bg-image: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="content">
+            <div class="panel split-grid">
+              <div>
+                <div class="eyebrow">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                  Masalah Umum
+                </div>
+                <h2>Kenapa Jualan Sering Macet?</h2>
+                <p class="lead">
+                  Banyak orang rajin posting, tapi belum punya struktur.
+                  Akibatnya promosi terasa capek, hasilnya tidak stabil, dan
+                  pembeli datang hanya sesekali.
+                </p>
               </div>
-              <h2>Mulai Dari yang Sederhana, Tapi Jalan Terus</h2>
-              <p class="lead">
-                Kalau hari ini bisnis belum stabil, fokus dulu pada tiga hal:
-                rapikan produk, kumpulkan market, dan publikasi rutin dengan CTA
-                yang jelas. Dari sini sistem cuan bisa dibangun pelan-pelan tapi
-                pasti.
-              </p>
-            </div>
-            <div class="cta-box">
-              <h3>Butuh dibantu susun strategi digital marketing?</h3>
-              <p>
-                Lanjutkan dari website utama atau hubungi WhatsApp untuk konsultasi
-                dan diskusi langkah yang paling cocok untuk bisnis Anda.
-              </p>
-              <div class="cta-actions">
-                <a
-                  class="btn-main"
-                  href="https://carisolusi.biz.id"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-solid fa-globe"></i> Kembali ke Web Carisolusi
-                </a>
-                <a
-                  class="btn-alt"
-                  href="https://wa.me/6281384072641?text=Halo%20Carisolusi%2C%20saya%20ingin%20konsultasi%20digital%20marketing."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i class="fa-brands fa-whatsapp"></i> Konsultasi via WhatsApp
-                </a>
+              <div class="quote-card">
+                <ul class="list">
+                  <li>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span
+                      >Produknya ada, tapi manfaatnya belum jelas di mata calon
+                      pembeli.</span
+                    >
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span
+                      >Kontennya ramai, tapi tidak diarahkan ke market yang
+                      tepat.</span
+                    >
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span
+                      >Sudah punya audience, tapi jarang follow up dan jarang
+                      membuat penawaran.</span
+                    >
+                  </li>
+                  <li>
+                    <i class="fa-solid fa-xmark"></i>
+                    <span
+                      >Tidak ada alur dari perhatian, minat, sampai
+                      closing.</span
+                    >
+                  </li>
+                </ul>
               </div>
-              <p class="mini-note">
-                Presentasi ini cocok dipakai untuk edukasi audiens, materi kelas,
-                atau slide promosi jasa digital marketing.
-              </p>
             </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        <section
+          class="slide"
+          id="slide-3"
+          data-title="Pilar Produk"
+          style="
+            --bg-image: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="content">
+            <div class="panel">
+              <div class="eyebrow">
+                <i class="fa-solid fa-box-open"></i>
+                Pilar Pertama
+              </div>
+              <h2>Produk: Jual Solusi, Bukan Sekadar Barang</h2>
+              <div class="triple-grid">
+                <article class="idea-card">
+                  <div class="icon"><i class="fa-solid fa-bullseye"></i></div>
+                  <h3>Perjelas Value</h3>
+                  <p>
+                    Tulis manfaat utama produk dalam satu kalimat sederhana:
+                    membantu siapa, menyelesaikan masalah apa, dan hasil apa
+                    yang didapat.
+                  </p>
+                </article>
+                <article class="idea-card">
+                  <div class="icon">
+                    <i class="fa-solid fa-layer-group"></i>
+                  </div>
+                  <h3>Buat Level Penawaran</h3>
+                  <p>
+                    Siapkan opsi pemula, utama, dan premium supaya market punya
+                    jalur masuk sesuai kebutuhan dan budget.
+                  </p>
+                </article>
+                <article class="idea-card">
+                  <div class="icon">
+                    <i class="fa-solid fa-comments-dollar"></i>
+                  </div>
+                  <h3>Siapkan Script Jualan</h3>
+                  <p>
+                    Gunakan kalimat penawaran singkat untuk status WA, caption,
+                    landing page, dan chat follow up.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          id="slide-4"
+          data-title="Pilar Market"
+          style="
+            --bg-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="content">
+            <div class="panel">
+              <div class="eyebrow">
+                <i class="fa-solid fa-users"></i>
+                Pilar Kedua
+              </div>
+              <h2>Market: Kenali Siapa yang Siap Membeli</h2>
+              <div class="triple-grid">
+                <article class="idea-card">
+                  <div class="icon"><i class="fa-solid fa-user-tag"></i></div>
+                  <h3>Segmentasi Sederhana</h3>
+                  <p>
+                    Kelompokkan market berdasarkan kebutuhan: baru kenal, pernah
+                    tanya, pernah beli, dan siap repeat order.
+                  </p>
+                </article>
+                <article class="idea-card">
+                  <div class="icon"><i class="fa-solid fa-database"></i></div>
+                  <h3>Bangun Database</h3>
+                  <p>
+                    Simpan kontak dari WhatsApp, form website, Instagram,
+                    komunitas, dan pelanggan lama untuk dijaga rutin.
+                  </p>
+                </article>
+                <article class="idea-card">
+                  <div class="icon">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                  </div>
+                  <h3>Rawat Relasi</h3>
+                  <p>
+                    Jangan hanya datang saat jualan. Bangun trust lewat edukasi,
+                    testimoni, update manfaat, dan follow up personal.
+                  </p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          id="slide-5"
+          data-title="Pilar Publikasi"
+          style="
+            --bg-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="content">
+            <div class="panel split-grid">
+              <div>
+                <div class="eyebrow">
+                  <i class="fa-solid fa-bullhorn"></i>
+                  Pilar Ketiga
+                </div>
+                <h2>Publikasi: Tampil Konsisten di Titik yang Tepat</h2>
+                <p class="lead">
+                  Publikasi bukan cuma posting ramai. Fokusnya adalah membuat
+                  market melihat penawaran yang jelas, berulang, dan mudah
+                  direspons.
+                </p>
+                <div class="steps">
+                  <div class="step-card">
+                    <div class="step-number">Step 01</div>
+                    <h3>Konten Edukasi</h3>
+                    <p>
+                      Bangun perhatian dengan masalah, tips, dan insight yang
+                      relevan.
+                    </p>
+                  </div>
+                  <div class="step-card">
+                    <div class="step-number">Step 02</div>
+                    <h3>Konten Penawaran</h3>
+                    <p>
+                      Tampilkan solusi, paket, bonus, testimoni, dan CTA yang
+                      tegas.
+                    </p>
+                  </div>
+                  <div class="step-card">
+                    <div class="step-number">Step 03</div>
+                    <h3>Konten Konversi</h3>
+                    <p>
+                      Arahkan ke WhatsApp, website, form, atau landing page
+                      untuk closing.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="quote-card">
+                <p class="quote-text">
+                  "Punya orangnya, kasih penawaran, lalu ulangi dengan sistem
+                  yang rapi."
+                </p>
+                <p class="mini-note">
+                  Kanal yang bisa dipakai: WhatsApp, website, SEO, Google
+                  Business Profile, Instagram, TikTok, komunitas, dan relasi
+                  offline.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          id="slide-6"
+          data-title="CTA Penutup"
+          style="
+            --bg-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80');
+          "
+        >
+          <div class="content">
+            <div class="panel cta-grid">
+              <div>
+                <div class="eyebrow">
+                  <i class="fa-solid fa-rocket"></i>
+                  Aksi Penutup
+                </div>
+                <h2>Mulai Dari yang Sederhana, Tapi Jalan Terus</h2>
+                <p class="lead">
+                  Kalau hari ini bisnis belum stabil, fokus dulu pada tiga hal:
+                  rapikan produk, kumpulkan market, dan publikasi rutin dengan
+                  CTA yang jelas. Dari sini sistem cuan bisa dibangun
+                  pelan-pelan tapi pasti.
+                </p>
+              </div>
+              <div class="cta-box">
+                <h3>Butuh dibantu susun strategi digital marketing?</h3>
+                <p>
+                  Lanjutkan dari website utama atau hubungi WhatsApp untuk
+                  konsultasi dan diskusi langkah yang paling cocok untuk bisnis
+                  Anda.
+                </p>
+                <div class="cta-actions">
+                  <a
+                    class="btn-main"
+                    href="https://carisolusi.biz.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="fa-solid fa-globe"></i> Kembali ke Web Carisolusi
+                  </a>
+                  <a
+                    class="btn-alt"
+                    href="https://wa.me/6281384072641?text=Halo%20Carisolusi%2C%20saya%20ingin%20konsultasi%20digital%20marketing."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <i class="fa-brands fa-whatsapp"></i> Konsultasi via
+                    WhatsApp
+                  </a>
+                </div>
+                <p class="mini-note">
+                  Presentasi ini cocok dipakai untuk edukasi audiens, materi
+                  kelas, atau slide promosi jasa digital marketing.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="controls">
+        <button class="nav-btn" id="prevBtn" type="button">
+          <i class="fa-solid fa-arrow-left"></i> Previous
+        </button>
+        <div class="dots" id="dotsNav" aria-label="Slide navigation"></div>
+        <button class="nav-btn" id="nextBtn" type="button">
+          Next <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </footer>
+    </div>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const progressBar = document.getElementById('progressBar');
+      const slideLabel = document.getElementById('slideLabel');
+      const slideCount = document.getElementById('slideCount');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const dotsNav = document.getElementById('dotsNav');
+      let currentSlide = 0;
+
+      slides.forEach((slide, index) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'dot';
+        dot.setAttribute('aria-label', `Ke slide ${index + 1}`);
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsNav.appendChild(dot);
+      });
+
+      const dots = Array.from(document.querySelectorAll('.dot'));
+
+      function updateUI() {
+        slides.forEach((slide, index) => {
+          slide.classList.toggle('active', index === currentSlide);
+        });
+
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentSlide);
+        });
+
+        const progress = ((currentSlide + 1) / slides.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        slideLabel.textContent =
+          slides[currentSlide].dataset.title || `Slide ${currentSlide + 1}`;
+        slideCount.textContent = `${currentSlide + 1} / ${slides.length}`;
+        prevBtn.disabled = currentSlide === 0;
+        nextBtn.disabled = currentSlide === slides.length - 1;
+      }
+
+      function goToSlide(index) {
+        if (index < 0 || index >= slides.length) return;
+        currentSlide = index;
+        updateUI();
+      }
+
+      prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+      nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight' || event.key === 'PageDown') {
+          goToSlide(currentSlide + 1);
+        }
+
+        if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+          goToSlide(currentSlide - 1);
+        }
+      });
+
+      updateUI();
+    </script>
   </body>
 </html>
