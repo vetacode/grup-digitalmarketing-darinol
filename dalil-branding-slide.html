@@ -3,409 +3,1540 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dalil Branding — High Ticket Slides</title>
+    <title>Dalil Branding - Materi Internal Strategi Branding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap"
       rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #06131f;
-        --panel: rgba(255, 255, 255, 0.06);
-        --line: rgba(255, 255, 255, 0.12);
-        --text: #ecf7ff;
-        --muted: #bed4df;
-        --accent: #5eead4;
-        --accent2: #60a5fa;
+        --bg: #f5f1e8;
+        --bg-deep: #e8dfd0;
+        --paper: rgba(255, 252, 247, 0.78);
+        --paper-strong: rgba(255, 252, 247, 0.92);
+        --ink: #1d2430;
+        --muted: #5f6671;
+        --line: rgba(29, 36, 48, 0.12);
+        --gold: #b07a38;
+        --gold-soft: rgba(176, 122, 56, 0.14);
+        --forest: #24483d;
+        --navy: #233754;
+        --danger: #8a3d2f;
       }
+
       * {
         box-sizing: border-box;
       }
+
+      html,
       body {
         margin: 0;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        background: linear-gradient(180deg, #041019, #081722);
-        color: var(--text);
+        height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
         overflow: hidden;
-      }
-      .slide {
-        position: absolute;
-        inset: 0;
-        display: grid;
-        align-items: center;
-        padding: 60px;
-        opacity: 0;
-        transform: translateX(20px);
-        transition: 0.25s;
-      }
-      .slide.active {
-        opacity: 1;
-        transform: none;
-      }
-      .slide::before {
-        content: '';
-        position: absolute;
-        inset: 0;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        color: var(--ink);
         background:
-          linear-gradient(120deg, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4)),
-          var(--bg-img) center/cover;
+          radial-gradient(
+            circle at top left,
+            rgba(176, 122, 56, 0.18),
+            transparent 30%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(35, 55, 84, 0.18),
+            transparent 24%
+          ),
+          linear-gradient(135deg, var(--bg), #f8f5ef 45%, var(--bg-deep));
       }
-      .content {
-        position: relative;
-        max-width: 1100px;
-        margin: auto;
+
+      .frame {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        border: 18px solid rgba(255, 255, 255, 0.18);
       }
-      .panel {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        padding: 32px;
-        backdrop-filter: blur(12px);
-      }
-      h1 {
-        font-size: clamp(3rem, 6vw, 5.2rem);
-        margin: 0 0 12px;
-        letter-spacing: -0.03em;
-      }
-      h2 {
-        font-size: clamp(1.8rem, 4vw, 3rem);
-        margin-bottom: 16px;
-      }
-      p {
-        color: var(--muted);
-        line-height: 1.7;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-      }
-      .card {
-        background: rgba(255, 255, 255, 0.05);
-        padding: 18px;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-      }
-      .badge {
-        display: inline-block;
-        background: rgba(255, 255, 255, 0.1);
-        padding: 8px 14px;
-        border-radius: 999px;
-        margin-bottom: 10px;
-        font-weight: 700;
-      }
+
       .progress {
         position: fixed;
         top: 0;
         left: 0;
-        height: 6px;
-        background: linear-gradient(90deg, var(--accent), var(--accent2));
-        width: 0%;
-        z-index: 10;
+        height: 5px;
+        width: 0;
+        background: linear-gradient(90deg, var(--gold), #cf9d56, var(--forest));
+        z-index: 20;
       }
-      .controls {
+
+      .counter {
         position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 24px;
+        right: 34px;
+        z-index: 20;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(29, 36, 48, 0.65);
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        padding: 64px;
+        opacity: 0;
+        transform: translateX(30px) scale(0.985);
+        transition: opacity 0.2s ease;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .slide.active {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
+      }
+
+      .slide.active .reveal {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+
+      .deck {
+        width: min(1180px, calc(100vw - 96px));
+        min-height: min(690px, calc(100vh - 120px));
+        padding: 38px;
+        border-radius: 34px;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(255, 255, 255, 0.7),
+            rgba(255, 250, 243, 0.82)
+          ),
+          var(--paper);
+        border: 1px solid rgba(255, 255, 255, 0.72);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 22px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .deck::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(135deg, rgba(176, 122, 56, 0.06), transparent 25%),
+          linear-gradient(315deg, rgba(35, 55, 84, 0.08), transparent 22%);
+        pointer-events: none;
+      }
+
+      .topbar,
+      .footerbar {
+        position: relative;
+        z-index: 1;
         display: flex;
+        justify-content: space-between;
         align-items: center;
-        gap: 12px;
-        z-index: 10;
+        gap: 16px;
       }
-      button {
-        padding: 10px 18px;
+
+      .eyebrow,
+      .section-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
         border-radius: 999px;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        background: transparent;
-        color: #fff;
-        cursor: pointer;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.58);
+        color: var(--navy);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.78rem;
+        transition: none;
       }
-      .dots {
-        display: flex;
-        gap: 6px;
-      }
-      .dot {
+
+      .section-tag::before,
+      .eyebrow::before {
+        content: '';
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: #fff3;
-        cursor: pointer;
+        background: var(--gold);
       }
-      .dot.active {
-        background: #fff;
-        transform: scale(1.3);
+
+      .brand-mark {
+        font-size: 0.86rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: rgba(29, 36, 48, 0.56);
+        transition: none;
       }
-      .counter {
-        position: fixed;
-        top: 12px;
-        right: 20px;
-        font-size: 0.9rem;
-        color: #fff8;
-        z-index: 10;
+
+      .content {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        gap: 28px;
+        align-content: center;
       }
-      .cta a {
-        display: inline-block;
-        margin: 8px;
-        padding: 12px 20px;
-        border-radius: 999px;
-        text-decoration: none;
+
+      .two-col {
+        grid-template-columns: 1.2fr 0.8fr;
+      }
+
+      .three-col {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .grid,
+      .two-col,
+      .three-col {
+        display: grid;
+        gap: 18px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin: 0;
+      }
+
+      h1 {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(3.3rem, 6vw, 5.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.04em;
+      }
+
+      h2 {
+        font-size: clamp(2rem, 3.4vw, 3.2rem);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+      }
+
+      h3 {
+        font-size: 1.08rem;
+        line-height: 1.4;
+      }
+
+      .lead {
+        font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+        line-height: 1.75;
+        color: var(--muted);
+        max-width: 760px;
+      }
+
+      .hero-note {
+        max-width: 560px;
+        padding: 22px 24px;
+        border-radius: 24px;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 248, 240, 0.95)
+        );
+        border: 1px solid rgba(176, 122, 56, 0.2);
+      }
+
+      .hero-note strong,
+      .pull-quote strong,
+      .principle strong {
+        color: var(--navy);
+      }
+
+      .accent {
+        color: var(--gold);
+      }
+
+      .panel,
+      .card,
+      .principle,
+      .stat,
+      .summary-box,
+      .pull-quote {
+        background: var(--paper-strong);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 22px;
+        transition: none;
+      }
+
+      .panel.soft,
+      .card.soft {
+        background: rgba(255, 255, 255, 0.58);
+      }
+
+      .panel-title {
+        margin-bottom: 10px;
+        font-size: 0.86rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        font-weight: 700;
+        color: rgba(35, 55, 84, 0.65);
+      }
+
+      .metric {
+        font-size: 2.1rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        margin-bottom: 8px;
+      }
+
+      .bullet-list,
+      .number-list,
+      .signal-list {
+        display: grid;
+        gap: 12px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .bullet-list li,
+      .signal-list li,
+      .number-list li {
+        position: relative;
+        padding-left: 18px;
+        color: var(--muted);
+        line-height: 1.65;
+      }
+
+      .bullet-list li::before,
+      .signal-list li::before,
+      .number-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.7em;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .signal-list li::before {
+        background: var(--forest);
+      }
+
+      .number-list li {
+        padding-left: 54px;
+        min-height: 40px;
+      }
+
+      .number-list li::before {
+        content: attr(data-no);
+        width: 34px;
+        height: 34px;
+        top: 2px;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--gold-soft);
+        color: var(--gold);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+
+      .principle-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+
+      .principle {
+        display: grid;
+        gap: 10px;
+        align-content: start;
+        min-height: 184px;
+      }
+
+      .principle small {
+        color: rgba(35, 55, 84, 0.65);
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
         font-weight: 700;
       }
-      .cta .main {
-        background: #fff;
-        color: #000;
+
+      .principle p {
+        color: var(--muted);
+        line-height: 1.62;
+        font-size: 0.97rem;
       }
-      .cta .alt {
-        border: 1px solid #fff;
+
+      .quote {
+        font-family: 'DM Serif Display', serif;
+        font-size: clamp(1.8rem, 2.6vw, 2.7rem);
+        line-height: 1.18;
+        letter-spacing: -0.03em;
+        max-width: 820px;
+      }
+
+      .strip {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+
+      .strip .card {
+        padding: 18px;
+      }
+
+      .strip .card strong {
+        display: block;
+        margin-bottom: 8px;
+        transition: none;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .footerbar {
+        color: rgba(29, 36, 48, 0.58);
+        font-size: 0.86rem;
+        flex-wrap: wrap;
+      }
+
+      .footerbar strong {
+        color: var(--navy);
+      }
+
+      .controls {
+        position: fixed;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: rgba(255, 255, 255, 0.68);
+        border: 1px solid rgba(29, 36, 48, 0.1);
+        border-radius: 999px;
+        padding: 10px 14px;
+        transition: none;
+      }
+
+      .controls button {
+        border: 0;
+        border-radius: 999px;
+        padding: 10px 18px;
+        font-weight: 700;
+        cursor: pointer;
+        background: var(--navy);
         color: #fff;
+        transition: none;
+      }
+
+      .controls button.secondary {
+        background: rgba(35, 55, 84, 0.1);
+        color: var(--navy);
+      }
+
+      .controls button:disabled {
+        opacity: 0.45;
+        cursor: not-allowed;
+      }
+
+      .dots {
+        display: flex;
+        gap: 8px;
+        min-width: 0;
+      }
+
+      .dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: rgba(35, 55, 84, 0.18);
+        cursor: pointer;
+        transition: none;
+      }
+
+      .dot.active {
+        background: var(--gold);
+      }
+
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 180px;
+        padding: 14px 20px;
+        border-radius: 999px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: none;
+      }
+
+      .cta.primary {
+        background: var(--navy);
+        color: #fff;
+      }
+
+      .cta.secondary {
+        background: rgba(35, 55, 84, 0.08);
+        color: var(--navy);
+        border: 1px solid rgba(35, 55, 84, 0.12);
+      }
+
+      .actions-two {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .mobile-hint {
+        display: none;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: calc(72px + env(safe-area-inset-bottom));
+        z-index: 29;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        color: rgba(29, 36, 48, 0.58);
+        font-size: 0.82rem;
+        font-weight: 600;
+        background: rgba(255, 255, 255, 0.56);
+        border: 1px solid rgba(29, 36, 48, 0.08);
+        border-radius: 999px;
+        padding: 8px 12px;
+        white-space: nowrap;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: none;
+        transition:
+          opacity 0.24s ease,
+          visibility 0.24s ease;
+      }
+
+      .mobile-hint.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .pull-quote,
+      .hero-note,
+      .summary-box {
+        position: relative;
+        isolation: isolate;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reveal,
+        .panel,
+        .card,
+        .principle,
+        .summary-box,
+        .pull-quote,
+        .controls,
+        .controls button,
+        .dot,
+        .cta,
+        .eyebrow,
+        .section-tag,
+        .brand-mark,
+        .mobile-hint {
+          transition: none !important;
+          animation: none !important;
+          transform: none !important;
+          filter: none !important;
+          opacity: 1 !important;
+        }
+      }
+
+      .closing-points {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+      }
+
+      .closing-points .card {
+        text-align: center;
+      }
+
+      .closing-points .card strong {
+        display: block;
+        font-size: 1.08rem;
+        margin-bottom: 6px;
+        color: var(--navy);
+      }
+
+      @media (max-width: 1024px) {
+        html,
+        body {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: hidden;
+        }
+
+        body {
+          overflow: hidden;
+        }
+
+        .slide {
+          inset: 0;
+          padding: 12px;
+          min-height: 100dvh;
+          width: 100%;
+          max-width: 100%;
+          transform: none;
+          overflow: hidden;
+        }
+
+        .deck {
+          width: calc(100% - 24px);
+          max-width: calc(100% - 24px);
+          min-height: calc(100dvh - 24px);
+          max-height: calc(100dvh - 24px);
+          padding: 20px 16px 88px;
+          gap: 18px;
+          overflow-x: hidden;
+          overflow-y: auto;
+          border-radius: 28px;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .two-col,
+        .three-col,
+        .principle-grid,
+        .strip,
+        .closing-points {
+          grid-template-columns: 1fr;
+        }
+
+        .topbar,
+        .footerbar {
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .eyebrow,
+        .section-tag {
+          max-width: 100%;
+          font-size: 0.66rem;
+          letter-spacing: 0.06em;
+          padding: 8px 12px;
+        }
+
+        .brand-mark {
+          font-size: 0.74rem;
+          letter-spacing: 0.1em;
+        }
+
+        .content {
+          gap: 18px;
+          align-content: start;
+        }
+
+        h1 {
+          font-size: clamp(2.25rem, 11vw, 3.5rem);
+          line-height: 0.98;
+        }
+
+        h2 {
+          font-size: clamp(1.45rem, 7vw, 2.2rem);
+          line-height: 1.08;
+        }
+
+        h3 {
+          font-size: 1rem;
+        }
+
+        .lead,
+        .muted,
+        .principle p,
+        .bullet-list li,
+        .signal-list li,
+        .number-list li {
+          font-size: 0.95rem;
+          line-height: 1.65;
+        }
+
+        .quote {
+          font-size: clamp(1.4rem, 7vw, 2rem);
+          line-height: 1.2;
+          max-width: 100%;
+        }
+
+        .panel,
+        .card,
+        .principle,
+        .summary-box,
+        .pull-quote,
+        .hero-note {
+          padding: 18px 16px;
+          border-radius: 20px;
+        }
+
+        .metric {
+          font-size: 1.72rem;
+        }
+
+        .principle {
+          min-height: auto;
+        }
+
+        .number-list li {
+          padding-left: 50px;
+        }
+
+        .number-list li::before {
+          width: 30px;
+          height: 30px;
+          font-size: 0.76rem;
+        }
+
+        .cta {
+          width: 100%;
+          min-width: 0;
+        }
+
+        .actions-two {
+          grid-template-columns: 1fr;
+        }
+
+        .controls {
+          left: 12px;
+          right: 12px;
+          transform: none;
+          bottom: max(12px, env(safe-area-inset-bottom));
+          width: auto;
+          max-width: none;
+          justify-content: space-between;
+          gap: 10px;
+          padding: 10px 12px;
+          border-radius: 22px;
+          overflow: hidden;
+        }
+
+        .controls button {
+          flex: 0 0 74px;
+          min-width: 0;
+          padding: 11px 10px;
+          font-size: 0.88rem;
+        }
+
+        .dots {
+          flex: 1;
+          min-width: 0;
+          justify-content: center;
+          flex-wrap: nowrap;
+          overflow: hidden;
+        }
+
+        .counter {
+          top: 14px;
+          right: 18px;
+          font-size: 0.72rem;
+          letter-spacing: 0.12em;
+        }
+
+        .frame {
+          border-width: 10px;
+        }
+
+        .mobile-hint {
+          display: flex;
+          left: 16px;
+          right: 16px;
+          transform: none;
+          bottom: calc(78px + env(safe-area-inset-bottom));
+          max-width: none;
+          text-align: center;
+          white-space: normal;
+        }
+
+        .panel:hover,
+        .card:hover,
+        .principle:hover,
+        .summary-box:hover,
+        .pull-quote:hover,
+        .cta:hover,
+        .controls button:hover:not(:disabled),
+        .dot:hover,
+        .eyebrow:hover,
+        .section-tag:hover,
+        .mobile-hint:hover {
+          transform: none;
+          box-shadow: none;
+        }
       }
     </style>
   </head>
   <body>
+    <div class="frame"></div>
     <div class="progress" id="progress"></div>
     <div class="counter" id="counter"></div>
 
-    <!-- Slides -->
-    <div
-      class="slide active"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1520607162513-77705c0f0d4a');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <span class="badge">Opening</span>
-          <h1>Dalil Branding</h1>
-          <p>
-            Kalau brand lemah, bisnis akan selalu perang harga dan mudah
-            dilupakan.
-          </p>
+    <section class="slide active">
+      <div class="deck">
+        <div class="topbar">
+          <span class="eyebrow">Bisnis Mindset · Strategi Branding</span>
+          <span class="brand-mark">Dalil Branding</span>
         </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1519389950473-47ba0277781c');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h2>Realita di Lapangan</h2>
-          <p>
-            Produk bagus belum tentu laku. Yang menang adalah yang paling jelas
-            di kepala market.
-          </p>
-          <ul>
-            <li>Tidak beda → dibanding harga</li>
-            <li>Tidak dikenal → tidak dipilih</li>
-            <li>Tidak dipercaya → tidak closing</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h1>Brand = Persepsi</h1>
-          <p>Bukan apa yang kamu buat. Tapi apa yang mereka ingat.</p>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h2>Dalil Inti</h2>
+        <div class="content two-col">
           <div class="grid">
-            <div class="card">
-              <b>Persepsi</b>
-              <p>Menentukan segalanya</p>
+            <h1>Dalil Branding</h1>
+            <p class="lead">
+              Prinsip-prinsip dasar branding yang menjadi pegangan dalam
+              membangun <span class="accent">persepsi</span>,
+              <span class="accent">nilai</span>,
+              <span class="accent">kepercayaan</span>, dan
+              <span class="accent">kekuatan brand jangka panjang</span>.
+            </p>
+            <div class="hero-note">
+              <p class="muted">
+                <strong>Pengertian:</strong> Dalil branding di sini bukan dalil
+                agama, tetapi istilah untuk menyebut hukum dasar, prinsip utama,
+                atau aturan main yang wajib dipahami agar brand tidak lemah,
+                tidak mudah dibandingkan harga, dan tidak mudah dilupakan pasar.
+              </p>
             </div>
-            <div class="card">
-              <b>Positioning</b>
-              <p>Harus beda</p>
+          </div>
+          <div class="grid">
+            <div class="panel">
+              <div class="panel-title">Masalah Utama</div>
+              <p class="quote">
+                Brand lemah membuat bisnis sibuk mengejar closing hari ini,
+                tetapi gagal membangun alasan mengapa market harus memilih kita
+                besok.
+              </p>
             </div>
-            <div class="card">
-              <b>Value</b>
-              <p>Jual makna</p>
-            </div>
-            <div class="card">
-              <b>Trust</b>
-              <p>Tanpa ini tidak closing</p>
-            </div>
-            <div class="card">
-              <b>Konsistensi</b>
-              <p>Ulang terus</p>
-            </div>
-            <div class="card">
-              <b>Emosi</b>
-              <p>Keputusan beli</p>
+            <div class="strip">
+              <div class="card soft">
+                <strong>Jelas</strong>
+                <p class="muted">Posisi brand mudah dipahami market.</p>
+              </div>
+              <div class="card soft">
+                <strong>Berbeda</strong>
+                <p class="muted">Punya alasan kuat untuk dipilih.</p>
+              </div>
+              <div class="card soft">
+                <strong>Dipercaya</strong>
+                <p class="muted">Ada bukti, pengalaman, dan konsistensi.</p>
+              </div>
+              <div class="card soft">
+                <strong>Bernilai</strong>
+                <p class="muted">Manfaat dan rasa yang dirasakan nyata.</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h2>Dalil Konten & Relevansi</h2>
-          <div class="grid">
-            <div class="card">
-              <b>Story</b>
-              <p>Lebih diingat</p>
-            </div>
-            <div class="card">
-              <b>Relevansi</b>
-              <p>Harus nyambung</p>
-            </div>
-            <div class="card">
-              <b>Simplicity</b>
-              <p>Jangan rumit</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1492724441997-5dc865305da7');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h2>Dalil Distribusi</h2>
-          <div class="grid">
-            <div class="card"><b>Frekuensi</b></div>
-            <div class="card"><b>Komunitas</b></div>
-            <div class="card"><b>Experience</b></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1552664730-d307ca884978');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h2>Dalil Strategi</h2>
-          <div class="grid">
-            <div class="card"><b>Anti Diskon</b></div>
-            <div class="card"><b>Fokus</b></div>
-            <div class="card"><b>Jangka Panjang</b></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d');
-      "
-    >
-      <div class="content">
-        <div class="panel">
-          <h2>Ringkasan Inti</h2>
-          <p>
-            Brand kuat = jelas, beda, dipercaya, konsisten, dan terasa nilainya.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="slide"
-      style="
-        --bg-img: url('https://images.unsplash.com/photo-1492724441997-5dc865305da7');
-      "
-    >
-      <div class="content">
-        <div class="panel cta">
-          <h2>Bangun Branding Anda Sekarang</h2>
-          <p>
-            Kalau tidak dibangun, market akan menentukan sendiri persepsinya —
-            dan itu jarang menguntungkan.
-          </p>
-          <a class="main" href="https://carisolusi.biz.id">Kunjungi Website</a>
-          <a class="alt" href="https://wa.me/6281384072641"
-            >Konsultasi WhatsApp</a
+        <div class="footerbar">
+          <span>Dokumen internal branding · versi praktis</span>
+          <span
+            ><strong>Fokus:</strong> membangun persepsi yang kuat, bukan sekadar
+            tampilan yang rapi</span
           >
         </div>
       </div>
-    </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Mengapa Branding Penting</span>
+          <span class="brand-mark">01</span>
+        </div>
+        <div class="content two-col">
+          <div class="panel">
+            <h2>Realita di lapangan: produk bagus belum tentu dipilih</h2>
+            <p class="lead">
+              Dalam banyak market, yang menang bukan selalu yang paling bagus,
+              tetapi yang paling <strong>jelas di kepala market</strong>, paling
+              mudah dipercaya, dan paling konsisten hadir.
+            </p>
+            <ul class="bullet-list">
+              <li>Kalau tidak berbeda, market akan membandingkan harga.</li>
+              <li>
+                Kalau tidak dikenal, brand tidak masuk shortlist pembelian.
+              </li>
+              <li>
+                Kalau tidak dipercaya, transaksi terjadi sekali lalu hilang.
+              </li>
+              <li>
+                Kalau pengalaman tidak konsisten, brand cepat rusak dari dalam.
+              </li>
+            </ul>
+          </div>
+          <div class="grid">
+            <div class="card">
+              <div class="panel-title">Akibat Brand Lemah</div>
+              <div class="metric">Perang Harga</div>
+              <p class="muted">
+                Bisnis dipaksa memberi diskon karena market tidak melihat
+                perbedaan yang bermakna.
+              </p>
+            </div>
+            <div class="card">
+              <div class="panel-title">Akibat Brand Kabur</div>
+              <div class="metric">Sulit Diingat</div>
+              <p class="muted">
+                Nama ada, tetapi asosiasi, manfaat, dan alasan memilihnya tidak
+                menempel.
+              </p>
+            </div>
+            <div class="card">
+              <div class="panel-title">Akibat Trust Rendah</div>
+              <div class="metric">Closing Rapuh</div>
+              <p class="muted">
+                Penjualan terjadi karena promo, bukan karena keyakinan market.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span>Branding adalah strategi bisnis, bukan dekorasi</span>
+          <span>Ketika persepsi lemah, margin ikut lemah</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Fondasi Utama</span>
+          <span class="brand-mark">02</span>
+        </div>
+        <div class="content">
+          <div class="pull-quote">
+            <p class="quote">
+              <strong
+                >Brand bukan apa yang dibuat, tetapi apa yang dipikirkan
+                orang.</strong
+              >
+            </p>
+            <p class="lead">
+              Karena itu, branding tidak boleh berhenti di logo, warna, dan
+              feed. Branding harus mengatur bagaimana market memahami kualitas,
+              manfaat, kelas, rasa aman, dan alasan untuk tetap memilih brand.
+            </p>
+          </div>
+          <div class="principle-grid">
+            <div class="principle">
+              <small>Persepsi</small>
+              <h3>Market membeli kesan yang tertanam di pikiran</h3>
+              <p>
+                Jika yang tertanam adalah murah, generik, atau tidak jelas, maka
+                promosi terbaik pun sulit mengangkat value.
+              </p>
+            </div>
+            <div class="principle">
+              <small>Positioning</small>
+              <h3>Brand harus punya tempat yang spesifik di benak market</h3>
+              <p>
+                Siapa targetnya, masalah apa yang diselesaikan, dan gaya solusi
+                seperti apa harus terasa tegas.
+              </p>
+            </div>
+            <div class="principle">
+              <small>Value</small>
+              <h3>Produk dibeli karena nilai yang dirasakan</h3>
+              <p>
+                Nilai mencakup manfaat fungsional, emosi, status, kenyamanan,
+                dan keyakinan bahwa pilihan ini layak.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span>Brand kuat = persepsi yang jelas dan konsisten</span>
+          <span>Jangan hanya mendesain tampilan, desain juga maknanya</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Dalil 1-5</span>
+          <span class="brand-mark">03</span>
+        </div>
+        <div class="content">
+          <h2>Lima dalil pertama yang membangun dasar brand</h2>
+          <div class="principle-grid">
+            <div class="principle">
+              <small>1. Dalil Persepsi</small>
+              <h3>
+                Brand bukan apa yang dibuat, tetapi apa yang dipikirkan orang
+              </h3>
+              <p>
+                Fokus pada persepsi market, bukan sekadar tampilan. Ukur apakah
+                market langsung paham kualitas, kelas, dan karakter brand.
+              </p>
+            </div>
+            <div class="principle">
+              <small>2. Dalil Positioning</small>
+              <h3>Kalau tidak berbeda, pasti dibandingkan harga</h3>
+              <p>
+                Pastikan brand jelas untuk siapa, problem apa yang diselesaikan,
+                dan mengapa solusi kita lebih relevan.
+              </p>
+            </div>
+            <div class="principle">
+              <small>3. Dalil Value</small>
+              <h3>
+                Orang tidak membeli produk, tetapi membeli nilai di baliknya
+              </h3>
+              <p>
+                Jual makna, manfaat, hasil, dan rasa. Produk hanyalah kendaraan
+                untuk value yang dicari market.
+              </p>
+            </div>
+            <div class="principle">
+              <small>4. Dalil Trust</small>
+              <h3>Tanpa kepercayaan, tidak ada transaksi yang kuat</h3>
+              <p>
+                Testimoni, bukti hasil, cara bicara, tampilan, dan pelayanan
+                harus bergerak bersama membangun trust.
+              </p>
+            </div>
+            <div class="principle">
+              <small>5. Dalil Konsistensi</small>
+              <h3>Brand kuat dibangun dari pengulangan yang stabil</h3>
+              <p>
+                Konten, layanan, nada komunikasi, dan kualitas experience harus
+                terasa satu arah dari waktu ke waktu.
+              </p>
+            </div>
+            <div class="principle">
+              <small>Implikasi Praktis</small>
+              <h3>Audit semua titik kontak brand</h3>
+              <p>
+                Cek apakah bio, konten, penawaran, admin, sales, dan aftersales
+                menyampaikan pesan yang sama atau masih saling bertabrakan.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span>Dalil 1-5 menentukan apakah brand dipahami dan dipercaya</span>
+          <span>Jika fondasi ini lemah, promosi akan terasa boros</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Dalil 6-10</span>
+          <span class="brand-mark">04</span>
+        </div>
+        <div class="content">
+          <h2>Dalil yang membuat brand mudah menempel di kepala market</h2>
+          <div class="principle-grid">
+            <div class="principle">
+              <small>6. Dalil Emosi</small>
+              <h3>
+                Keputusan beli lebih sering digerakkan emosi daripada logika
+              </h3>
+              <p>
+                Bangun rasa aman, nyaman, bangga, cocok, atau lega. Logika
+                biasanya datang belakangan sebagai pembenaran.
+              </p>
+            </div>
+            <div class="principle">
+              <small>7. Dalil Story</small>
+              <h3>Orang lebih mudah mengingat cerita daripada data biasa</h3>
+              <p>
+                Cerita membuat brand punya konteks manusiawi. Gunakan kisah
+                proses, perubahan, pelanggan, dan alasan brand berdiri.
+              </p>
+            </div>
+            <div class="principle">
+              <small>8. Dalil Relevansi</small>
+              <h3>
+                Brand yang nyambung dengan kehidupan market lebih cepat diterima
+              </h3>
+              <p>
+                Bahas problem nyata, bahasa sehari-hari, dan situasi yang akrab
+                bagi target market, bukan hanya jargon internal.
+              </p>
+            </div>
+            <div class="principle">
+              <small>9. Dalil Simplicity</small>
+              <h3>
+                Brand sederhana lebih mudah diingat daripada brand yang rumit
+              </h3>
+              <p>
+                Sederhanakan nama, pesan utama, headline, dan penawaran agar
+                market bisa mengulangnya dengan mudah.
+              </p>
+            </div>
+            <div class="principle">
+              <small>10. Dalil Frekuensi</small>
+              <h3>Yang sering terlihat lebih mudah dipercaya dan diingat</h3>
+              <p>
+                Distribusi yang rutin mengalahkan kampanye sesekali. Hadir terus
+                lebih penting daripada sesekali ramai lalu hilang.
+              </p>
+            </div>
+            <div class="principle">
+              <small>Arahan Eksekusi</small>
+              <h3>Perkuat pesan inti dengan pola berulang</h3>
+              <p>
+                Ulangi angle utama dalam berbagai format: edukasi, studi kasus,
+                testimoni, behind the scenes, dan penawaran.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span>Emosi + cerita + relevansi membuat brand terasa hidup</span>
+          <span
+            >Simpel dan sering hadir jauh lebih efektif daripada rumit dan
+            jarang</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Dalil 11-15</span>
+          <span class="brand-mark">05</span>
+        </div>
+        <div class="content">
+          <h2>Dalil yang menjaga daya tahan brand dalam jangka panjang</h2>
+          <div class="principle-grid">
+            <div class="principle">
+              <small>11. Dalil Komunitas</small>
+              <h3>
+                Brand kuat tidak hanya punya pembeli, tetapi punya orang yang
+                terhubung
+              </h3>
+              <p>
+                Relasi, interaksi, dan rasa memiliki menciptakan loyalitas yang
+                lebih kuat daripada transaksi semata.
+              </p>
+            </div>
+            <div class="principle">
+              <small>12. Dalil Anti Diskon</small>
+              <h3>Semakin sering diskon, semakin mudah brand dianggap murah</h3>
+              <p>
+                Naikkan value, paketkan benefit, dan perjelas pembeda agar
+                closing tidak bergantung pada banting harga.
+              </p>
+            </div>
+            <div class="principle">
+              <small>13. Dalil Experience</small>
+              <h3>Brand dibentuk dari pengalaman nyata, bukan janji semata</h3>
+              <p>
+                Operasional adalah bagian dari branding. Cara menyambut, respon,
+                kualitas pengiriman, dan aftersales membentuk reputasi.
+              </p>
+            </div>
+            <div class="principle">
+              <small>14. Dalil Fokus</small>
+              <h3>Brand besar sering dimulai dari fokus yang sempit</h3>
+              <p>
+                Kuasai satu niche, satu wilayah, atau satu segmen dulu sebelum
+                memperluas cakupan. Fokus mempercepat kekuatan asosiasi.
+              </p>
+            </div>
+            <div class="principle">
+              <small>15. Dalil Jangka Panjang</small>
+              <h3>Brand adalah investasi persepsi, bukan hasil instan</h3>
+              <p>
+                Branding menuntut kesabaran. Yang dibangun adalah ingatan,
+                keyakinan, dan pengalaman yang terakumulasi.
+              </p>
+            </div>
+            <div class="principle">
+              <small>Pesan Penting</small>
+              <h3>
+                Brand yang tahan lama dibangun dari disiplin, bukan gimmick
+              </h3>
+              <p>
+                Promosi boleh berubah, kanal boleh berganti, tetapi identitas
+                dan nilai inti brand harus tetap terasa.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span>Komunitas, experience, dan fokus memperpanjang umur brand</span>
+          <span>Diskon boleh dipakai taktis, bukan jadi identitas</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Implementasi Praktis</span>
+          <span class="brand-mark">06</span>
+        </div>
+        <div class="content two-col">
+          <div class="panel">
+            <h2>Checklist penerapan dalil branding</h2>
+            <ol class="number-list">
+              <li data-no="01">
+                Tentukan satu positioning utama yang paling mudah dijelaskan
+                dalam satu kalimat.
+              </li>
+              <li data-no="02">
+                Pastikan penawaran menjual hasil, bukan hanya fitur atau
+                spesifikasi.
+              </li>
+              <li data-no="03">
+                Siapkan bukti trust: testimoni, portofolio, proses kerja, dan
+                jaminan yang wajar.
+              </li>
+              <li data-no="04">
+                Standarkan tone komunikasi, visual, dan alur pelayanan agar
+                konsisten.
+              </li>
+              <li data-no="05">
+                Bangun kalender konten yang mengulang pesan inti dengan format
+                berbeda.
+              </li>
+              <li data-no="06">
+                Perbaiki pengalaman pelanggan dari titik pertama melihat brand
+                sampai purna jual.
+              </li>
+            </ol>
+          </div>
+          <div class="grid">
+            <div class="summary-box">
+              <div class="panel-title">Konten Yang Disarankan</div>
+              <ul class="signal-list">
+                <li>Edukasi problem market dan miskonsepsi umum.</li>
+                <li>Story proses, before-after, dan studi kasus pelanggan.</li>
+                <li>Proof content: review, data hasil, behind the scenes.</li>
+                <li>Konten value: tips, panduan, framework, insight.</li>
+              </ul>
+            </div>
+            <div class="summary-box">
+              <div class="panel-title">Indikator Brand Makin Kuat</div>
+              <ul class="signal-list">
+                <li>Market mulai menyebut brand dengan asosiasi yang jelas.</li>
+                <li>Lead datang dengan ekspektasi yang lebih tepat.</li>
+                <li>Harga tidak lagi menjadi satu-satunya bahan negosiasi.</li>
+                <li>
+                  Pelanggan lama lebih mudah repeat order dan merekomendasikan.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span
+            >Branding harus diterjemahkan ke konten, pelayanan, dan
+            pengalaman</span
+          >
+          <span>Jika tidak turun ke eksekusi, dalil hanya jadi teori</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Ringkasan Inti</span>
+          <span class="brand-mark">07</span>
+        </div>
+        <div class="content">
+          <div class="pull-quote">
+            <p class="quote">
+              Brand kuat bukan sekadar terlihat bagus, tetapi
+              <strong>dipersepsikan jelas</strong>, terasa bernilai, dan terus
+              hadir dalam ingatan market.
+            </p>
+          </div>
+          <div class="two-col">
+            <div class="panel">
+              <h3>Ringkasan inti</h3>
+              <ul class="bullet-list">
+                <li>
+                  Brand yang tidak punya pembeda akan terjebak perang harga.
+                </li>
+                <li>
+                  Trust, value, konsistensi, dan experience adalah fondasi
+                  utama.
+                </li>
+                <li>
+                  Brand dibangun dari pengulangan, relevansi, dan hubungan
+                  jangka panjang.
+                </li>
+                <li>
+                  Yang dibangun bukan hanya penjualan, tetapi ingatan dan
+                  keyakinan market.
+                </li>
+              </ul>
+            </div>
+            <div class="panel">
+              <h3>Versi singkat untuk pegangan</h3>
+              <div class="closing-points">
+                <div class="card soft">
+                  <strong>Jelas</strong>
+                  <p class="muted">
+                    Untuk siapa dan masalah apa yang diselesaikan.
+                  </p>
+                </div>
+                <div class="card soft">
+                  <strong>Berbeda</strong>
+                  <p class="muted">Ada alasan kuat mengapa brand dipilih.</p>
+                </div>
+                <div class="card soft">
+                  <strong>Dipercaya</strong>
+                  <p class="muted">
+                    Bukti, pengalaman, dan konsistensi terasa nyata.
+                  </p>
+                </div>
+                <div class="card soft">
+                  <strong>Hadir Terus</strong>
+                  <p class="muted">
+                    Muncul berulang agar melekat di kepala market.
+                  </p>
+                </div>
+                <div class="card soft">
+                  <strong>Bernilai</strong>
+                  <p class="muted">
+                    Manfaat, emosi, dan kualitasnya benar-benar terasa.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span
+            >Kalimat kunci: jelas, berbeda, dipercaya, hadir terus,
+            bernilai</span
+          >
+          <span>Ini adalah pegangan praktis untuk menjaga arah brand</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide">
+      <div class="deck">
+        <div class="topbar">
+          <span class="section-tag">Penutup</span>
+          <span class="brand-mark">08</span>
+        </div>
+        <div class="content two-col">
+          <div class="grid">
+            <h2>
+              Branding yang kuat tidak dibangun dalam sehari, tetapi bisa runtuh
+              dalam banyak ketidakkonsistenan kecil.
+            </h2>
+            <p class="lead">
+              Karena itu, branding harus diperlakukan sebagai investasi
+              persepsi. Semakin disiplin kita menjaga makna, pengalaman, dan
+              kehadiran brand, semakin kuat posisi bisnis dalam jangka panjang.
+            </p>
+            <div class="panel">
+              <div class="panel-title">Pesan penutup</div>
+              <p class="muted">
+                Kalau brand tidak dibangun dengan sadar, market akan membentuk
+                persepsinya sendiri. Dan persepsi yang terbentuk tanpa kendali
+                sering kali tidak menguntungkan.
+              </p>
+            </div>
+          </div>
+          <div class="grid">
+            <div class="summary-box">
+              <div class="panel-title">Arah diskusi lanjutan</div>
+              <ul class="signal-list">
+                <li>Audit positioning brand saat ini.</li>
+                <li>Susun pilar pesan utama untuk konten.</li>
+                <li>Petakan titik trust dan titik experience.</li>
+                <li>Rancang ritme distribusi yang konsisten.</li>
+              </ul>
+            </div>
+            <div class="actions-two">
+              <a class="cta primary" href="https://carisolusi.biz.id"
+                >Kunjungi Website</a
+              >
+              <a class="cta secondary" href="https://wa.me/6281384072641"
+                >Konsultasi WhatsApp</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footerbar">
+          <span>Dalil Branding · materi internal strategi branding</span>
+          <span>Bangun persepsi sebelum mengejar skala</span>
+        </div>
+      </div>
+    </section>
 
     <div class="controls">
-      <button onclick="prev()">Prev</button>
+      <button class="secondary" id="prevBtn" onclick="prev()">Prev</button>
       <div class="dots" id="dots"></div>
-      <button onclick="next()">Next</button>
+      <button id="nextBtn" onclick="next()">Next</button>
     </div>
+    <div class="mobile-hint">Swipe atau tap Next/Prev untuk pindah slide</div>
 
     <script>
       const slides = document.querySelectorAll('.slide');
+      const decks = document.querySelectorAll('.deck');
       const progress = document.getElementById('progress');
       const counter = document.getElementById('counter');
       const dotsWrap = document.getElementById('dots');
-      let i = 0;
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const mobileHint = document.querySelector('.mobile-hint');
+      let index = 0;
+      let mobileHintTimer;
+
       slides.forEach((_, idx) => {
-        let d = document.createElement('div');
-        d.className = 'dot';
-        d.onclick = () => go(idx);
-        dotsWrap.appendChild(d);
+        const dot = document.createElement('div');
+        dot.className = 'dot';
+        dot.onclick = () => go(idx);
+        dotsWrap.appendChild(dot);
       });
+
       const dots = document.querySelectorAll('.dot');
-      function update() {
-        slides.forEach((s, idx) => s.classList.toggle('active', idx === i));
-        dots.forEach((d, idx) => d.classList.toggle('active', idx === i));
-        progress.style.width = ((i + 1) / slides.length) * 100 + '%';
-        counter.innerText = `${i + 1} / ${slides.length}`;
-      }
-      function next() {
-        if (i < slides.length - 1) i++;
-        update();
-      }
-      function prev() {
-        if (i > 0) i--;
-        update();
-      }
-      function go(x) {
-        i = x;
-        update();
-      }
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowRight') next();
-        if (e.key === 'ArrowLeft') prev();
+
+      slides.forEach((slide) => {
+        const revealTargets = slide.querySelectorAll(
+          '.topbar > *, .content > *, .content .panel, .content .card, .content .principle, .content .summary-box, .content .pull-quote, .content .hero-note, .footerbar > *',
+        );
+
+        revealTargets.forEach((element, idx) => {
+          element.classList.add('reveal');
+          element.style.setProperty('--delay', `${120 + idx * 70}ms`);
+        });
       });
+
+      function update() {
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === index);
+        });
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === index);
+        });
+        progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+        counter.textContent = `${String(index + 1).padStart(2, '0')} / ${String(
+          slides.length,
+        ).padStart(2, '0')}`;
+        prevBtn.disabled = index === 0;
+        nextBtn.disabled = index === slides.length - 1;
+
+        const activeDeck = slides[index].querySelector('.deck');
+        if (activeDeck) activeDeck.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function isMobileViewport() {
+        return window.matchMedia('(max-width: 1024px)').matches;
+      }
+
+      function hideMobileHint() {
+        if (mobileHint) mobileHint.classList.add('is-hidden');
+      }
+
+      function showMobileHintTemporarily() {
+        if (!mobileHint || !isMobileViewport()) return;
+        mobileHint.classList.remove('is-hidden');
+        clearTimeout(mobileHintTimer);
+        mobileHintTimer = setTimeout(hideMobileHint, 2600);
+      }
+
+      function next() {
+        if (index < slides.length - 1) {
+          index += 1;
+          update();
+        }
+        hideMobileHint();
+      }
+
+      function prev() {
+        if (index > 0) {
+          index -= 1;
+          update();
+        }
+        hideMobileHint();
+      }
+
+      function go(target) {
+        index = target;
+        update();
+        hideMobileHint();
+      }
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowRight' || event.key === 'PageDown') next();
+        if (event.key === 'ArrowLeft' || event.key === 'PageUp') prev();
+      });
+
+      decks.forEach((deck) => {
+        const syncScrollable = () => {
+          const isScrollable = deck.scrollHeight - deck.clientHeight > 8;
+          const atBottom =
+            deck.scrollTop + deck.clientHeight >= deck.scrollHeight - 8;
+          deck.classList.toggle('scrollable', isScrollable && !atBottom);
+        };
+
+        let touchStartX = 0;
+        let touchStartY = 0;
+
+        deck.addEventListener('scroll', syncScrollable, { passive: true });
+        deck.addEventListener('scroll', hideMobileHint, { passive: true });
+        deck.addEventListener(
+          'touchstart',
+          (event) => {
+            const touch = event.changedTouches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            hideMobileHint();
+          },
+          { passive: true },
+        );
+        deck.addEventListener(
+          'touchend',
+          (event) => {
+            const touch = event.changedTouches[0];
+            const deltaX = touch.clientX - touchStartX;
+            const deltaY = touch.clientY - touchStartY;
+            if (Math.abs(deltaX) > 55 && Math.abs(deltaY) < 45) {
+              if (deltaX < 0) next();
+              if (deltaX > 0) prev();
+            }
+          },
+          { passive: true },
+        );
+
+        syncScrollable();
+      });
+
+      window.addEventListener('resize', () => {
+        if (isMobileViewport()) {
+          showMobileHintTemporarily();
+        } else {
+          hideMobileHint();
+        }
+      });
+
       update();
+      showMobileHintTemporarily();
     </script>
   </body>
 </html>
