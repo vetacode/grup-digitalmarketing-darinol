@@ -1,0 +1,1485 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Deck Premium - Cara Dapat Cuan Harian</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #031120;
+        --panel: rgba(8, 23, 43, 0.74);
+        --panel-soft: rgba(255, 255, 255, 0.08);
+        --line: rgba(148, 197, 255, 0.16);
+        --text: #eff6ff;
+        --muted: #bfd4ea;
+        --accent: #60a5fa;
+        --accent-2: #38bdf8;
+        --accent-3: #2563eb;
+        --accent-4: #93c5fd;
+        --success: #86efac;
+        --warning: #fde68a;
+        --danger: #fca5a5;
+        --shadow: 0 28px 70px rgba(1, 10, 22, 0.45);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+      }
+
+      body {
+        font-family: 'Manrope', sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(56, 189, 248, 0.24),
+            transparent 28%
+          ),
+          radial-gradient(
+            circle at 85% 12%,
+            rgba(37, 99, 235, 0.22),
+            transparent 24%
+          ),
+          linear-gradient(180deg, #020816 0%, #031120 45%, #04182f 100%);
+      }
+
+      .presentation {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+      }
+
+      .presentation::before,
+      .presentation::after {
+        content: '';
+        position: fixed;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.38;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .presentation::before {
+        top: -120px;
+        left: -90px;
+        background: rgba(56, 189, 248, 0.28);
+      }
+
+      .presentation::after {
+        right: -120px;
+        bottom: -120px;
+        background: rgba(37, 99, 235, 0.26);
+      }
+
+      .top-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        padding: 18px 24px 0;
+      }
+
+      .top-shell {
+        width: min(1160px, 100%);
+        margin: 0 auto;
+      }
+
+      .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 12px;
+        color: rgba(239, 246, 255, 0.82);
+        font-size: 0.86rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .brand-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent));
+        box-shadow: 0 0 18px rgba(96, 165, 250, 0.8);
+      }
+
+      .progress-track {
+        height: 10px;
+        border-radius: 999px;
+        overflow: hidden;
+        border: 1px solid rgba(191, 219, 254, 0.14);
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(10px);
+      }
+
+      .progress-bar {
+        width: 8.33%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(
+          90deg,
+          var(--accent-4) 0%,
+          var(--accent-2) 50%,
+          var(--accent-3) 100%
+        );
+        transition: width 0.26s ease;
+      }
+
+      .deck {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        overflow: hidden;
+        touch-action: pan-y;
+      }
+
+      .slide {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translate3d(36px, 0, 0) scale(0.985);
+        transition:
+          opacity 0.28s ease,
+          transform 0.28s ease,
+          visibility 0.28s ease;
+      }
+
+      .slide.active {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0) scale(1);
+        z-index: 2;
+      }
+
+      .slide::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(
+            120deg,
+            rgba(2, 6, 23, 0.88) 0%,
+            rgba(2, 6, 23, 0.55) 48%,
+            rgba(2, 6, 23, 0.9) 100%
+          ),
+          var(--bg-image) center/cover no-repeat;
+        opacity: 0.9;
+      }
+
+      .content {
+        position: relative;
+        z-index: 1;
+        width: min(1160px, calc(100% - 36px));
+        margin: 0 auto;
+        padding: 110px 0 112px;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 32px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px);
+      }
+
+      .hero-panel {
+        padding: 42px;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        background: rgba(147, 197, 253, 0.1);
+        border: 1px solid rgba(147, 197, 253, 0.18);
+        color: var(--accent-4);
+        font-size: 0.86rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      h1,
+      h2,
+      h3,
+      p {
+        margin-top: 0;
+      }
+
+      h1,
+      h2,
+      h3,
+      .section-title,
+      .big-stat strong {
+        font-family: 'Space Grotesk', sans-serif;
+      }
+
+      h1 {
+        max-width: 820px;
+        margin: 22px 0 18px;
+        font-size: clamp(2.8rem, 6vw, 5.8rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+
+      h2,
+      .section-title {
+        margin-bottom: 18px;
+        font-size: clamp(2rem, 4vw, 3.35rem);
+        line-height: 1.02;
+        letter-spacing: -0.04em;
+      }
+
+      h3 {
+        margin-bottom: 12px;
+        font-size: 1.25rem;
+        letter-spacing: -0.02em;
+      }
+
+      .lead {
+        max-width: 740px;
+        font-size: clamp(1rem, 2vw, 1.18rem);
+        line-height: 1.8;
+        color: var(--muted);
+      }
+
+      .hero-grid,
+      .split-grid,
+      .two-col,
+      .three-col,
+      .four-col {
+        display: grid;
+        gap: 22px;
+      }
+
+      .hero-grid,
+      .split-grid,
+      .two-col {
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+      }
+
+      .three-col {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .four-col {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .chips,
+      .stat-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .chip,
+      .mini-card,
+      .note,
+      .quote-box,
+      .formula-card,
+      .step-card,
+      .timeline-card,
+      .script-card,
+      .danger-card,
+      .success-card,
+      .matrix-card {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(191, 219, 254, 0.12);
+        border-radius: 24px;
+      }
+
+      .chip {
+        padding: 12px 16px;
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      .chip i {
+        margin-right: 8px;
+        color: var(--accent-4);
+      }
+
+      .side-card,
+      .note,
+      .quote-box,
+      .formula-card,
+      .script-card {
+        padding: 24px;
+      }
+
+      .side-card {
+        height: 100%;
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+
+      .kpi {
+        display: grid;
+        gap: 8px;
+        padding: 18px 20px;
+        border-radius: 24px;
+        background: linear-gradient(
+          180deg,
+          rgba(96, 165, 250, 0.13),
+          rgba(56, 189, 248, 0.07)
+        );
+        border: 1px solid rgba(147, 197, 253, 0.18);
+      }
+
+      .kpi strong {
+        font-size: 2rem;
+        line-height: 1;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .list li {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      .list li i {
+        width: 20px;
+        margin-top: 4px;
+        color: var(--accent-4);
+      }
+
+      .highlight {
+        padding: 18px 20px;
+        border-radius: 22px;
+        background: linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.18),
+          rgba(56, 189, 248, 0.12)
+        );
+        border: 1px solid rgba(96, 165, 250, 0.22);
+        color: #e0f2fe;
+        line-height: 1.7;
+      }
+
+      .mini-card,
+      .step-card,
+      .timeline-card,
+      .danger-card,
+      .success-card,
+      .matrix-card {
+        padding: 22px;
+        height: 100%;
+      }
+
+      .icon-head {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 18px;
+        margin-bottom: 14px;
+        background: linear-gradient(
+          135deg,
+          rgba(96, 165, 250, 0.28),
+          rgba(37, 99, 235, 0.18)
+        );
+        color: var(--accent-4);
+        font-size: 1.1rem;
+        box-shadow: inset 0 0 0 1px rgba(191, 219, 254, 0.12);
+      }
+
+      .big-stat {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .big-stat strong {
+        font-size: clamp(2.2rem, 4vw, 3.6rem);
+        letter-spacing: -0.05em;
+      }
+
+      .formula-card {
+        background:
+          linear-gradient(
+            135deg,
+            rgba(59, 130, 246, 0.2),
+            rgba(14, 165, 233, 0.1)
+          ),
+          rgba(255, 255, 255, 0.04);
+      }
+
+      .formula-card strong {
+        display: block;
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        line-height: 1.2;
+      }
+
+      .compare {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+      }
+
+      .danger-card {
+        background: linear-gradient(
+          180deg,
+          rgba(127, 29, 29, 0.18),
+          rgba(248, 113, 113, 0.06)
+        );
+      }
+
+      .success-card {
+        background: linear-gradient(
+          180deg,
+          rgba(20, 83, 45, 0.2),
+          rgba(74, 222, 128, 0.06)
+        );
+      }
+
+      .quote-box {
+        line-height: 1.8;
+        color: #dbeafe;
+      }
+
+      .script-card {
+        font-size: 1.02rem;
+        line-height: 1.9;
+        color: #eff6ff;
+      }
+
+      .actions {
+        display: grid;
+        gap: 14px;
+      }
+
+      .action-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px 16px;
+        border-radius: 18px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(191, 219, 254, 0.1);
+      }
+
+      .action-row span {
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: #031120;
+        flex-shrink: 0;
+      }
+
+      .footer-nav {
+        position: fixed;
+        bottom: 22px;
+        left: 0;
+        right: 0;
+        z-index: 10;
+        padding: 0 24px;
+      }
+
+      .nav-shell {
+        width: min(1160px, 100%);
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+      }
+
+      .nav-buttons {
+        display: flex;
+        gap: 12px;
+      }
+
+      .cta-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 24px;
+      }
+
+      .cta-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-width: 220px;
+        padding: 15px 20px;
+        border-radius: 999px;
+        text-decoration: none;
+        font-weight: 800;
+        color: var(--text);
+        background: rgba(8, 23, 43, 0.88);
+        border: 1px solid rgba(191, 219, 254, 0.16);
+        box-shadow: var(--shadow);
+      }
+
+      .cta-link.primary {
+        color: #031120;
+        background: linear-gradient(135deg, var(--accent-4), var(--accent-2));
+      }
+
+      button {
+        border: 0;
+        border-radius: 999px;
+        padding: 13px 18px;
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+        color: var(--text);
+        background: rgba(8, 23, 43, 0.88);
+        border: 1px solid rgba(191, 219, 254, 0.16);
+        box-shadow: var(--shadow);
+      }
+
+      button.primary {
+        color: #031120;
+        background: linear-gradient(135deg, var(--accent-4), var(--accent-2));
+      }
+
+      @media (max-width: 980px) {
+        html,
+        body {
+          overflow: hidden;
+        }
+
+        .presentation,
+        .deck {
+          height: 100vh;
+          overflow: hidden;
+        }
+
+        .top-bar {
+          padding: 14px 14px 0;
+        }
+
+        .slide {
+          position: absolute;
+          min-height: 100vh;
+        }
+
+        .content {
+          width: min(100%, calc(100% - 20px));
+          height: 100vh;
+          padding: 84px 0 96px;
+          overflow-y: auto;
+          -webkit-overflow-scrolling: touch;
+        }
+
+        .hero-grid,
+        .split-grid,
+        .two-col,
+        .three-col,
+        .four-col,
+        .compare {
+          grid-template-columns: 1fr;
+        }
+
+        .hero-panel {
+          padding: 24px 18px;
+          border-radius: 26px;
+        }
+
+        .meta {
+          margin-bottom: 10px;
+          font-size: 0.74rem;
+          gap: 10px;
+        }
+
+        .brand span:last-child {
+          max-width: 190px;
+        }
+
+        h1 {
+          font-size: clamp(2.35rem, 11vw, 3.7rem);
+        }
+
+        h2,
+        .section-title {
+          font-size: clamp(1.8rem, 8vw, 2.5rem);
+        }
+
+        .lead {
+          font-size: 0.98rem;
+          line-height: 1.7;
+        }
+
+        .footer-nav {
+          padding: 0 14px 14px;
+        }
+
+        .nav-shell {
+          width: 100%;
+        }
+
+        .nav-buttons {
+          width: 100%;
+          justify-content: space-between;
+        }
+
+        .cta-group {
+          flex-direction: column;
+        }
+
+        .cta-link {
+          width: 100%;
+          min-width: 0;
+        }
+
+        button {
+          padding: 12px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="presentation">
+      <header class="top-bar">
+        <div class="top-shell">
+          <div class="meta">
+            <div class="brand">
+              <span class="brand-dot"></span>
+              <span>Premium Digital Marketing Deck</span>
+            </div>
+            <div id="counter">Slide 1 / 13</div>
+          </div>
+          <div class="progress-track">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+      </header>
+
+      <main class="deck" id="deck">
+        <section
+          class="slide active"
+          style="
+            --bg-image:
+              radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.2), transparent 26%),
+              linear-gradient(135deg, #031120 0%, #0b2f63 45%, #031120 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <div class="hero-grid">
+                <div>
+                  <span class="eyebrow"
+                    ><i class="fa-solid fa-signal"></i> Cashflow Marketing</span
+                  >
+                  <h1>Cara Dapat Cuan Harian dengan Strategi Organik dan Ads</h1>
+                  <p class="lead">
+                    Fokus materi ini bukan sekadar bikin bisnis terlihat keren,
+                    tapi membangun arus transaksi yang ringan, cepat, dan bisa
+                    diulang setiap hari dengan pendekatan digital marketing yang
+                    realistis.
+                  </p>
+                  <div class="chips">
+                    <div class="chip">
+                      <i class="fa-solid fa-bolt"></i> Cashflow dulu
+                    </div>
+                    <div class="chip">
+                      <i class="fa-solid fa-users"></i> Database sebagai aset
+                    </div>
+                    <div class="chip">
+                      <i class="fa-solid fa-bullhorn"></i> Hook untuk stopping power
+                    </div>
+                  </div>
+                </div>
+                <aside class="panel side-card">
+                  <div class="kpi">
+                    <span class="muted">Target utama fase awal</span>
+                    <strong>Closing kecil, rutin, berulang</strong>
+                  </div>
+                  <div class="kpi">
+                    <span class="muted">Mindset pemenang</span>
+                    <strong>Volume > gengsi</strong>
+                  </div>
+                  <div class="highlight">
+                    Premium bukan berarti rumit. Premium di deck ini artinya
+                    pesan lebih tajam, visual lebih kuat, dan urutan materi
+                    lebih mudah dipresentasikan.
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.18), transparent 22%),
+              linear-gradient(135deg, #041226 0%, #0a2548 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-brain"></i> Slide 2</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Mindset awal: jangan kejar terlihat besar</div>
+                  <p class="lead">
+                    Banyak pelaku usaha baru terlalu cepat ingin terlihat
+                    premium, padahal bisnis belum punya ritme penjualan yang
+                    stabil. Akibatnya energi habis untuk kemasan, bukan untuk
+                    transaksi.
+                  </p>
+                  <div class="quote-box">
+                    Di fase awal, yang paling sehat bukan margin besar per
+                    transaksi, tetapi arus uang yang bergerak terus.
+                  </div>
+                </div>
+                <div class="three-col">
+                  <div class="mini-card">
+                    <div class="icon-head"><i class="fa-solid fa-star"></i></div>
+                    <h3>Kesalahan umum</h3>
+                    <p class="muted">Mau langsung mahal, langsung rapi, langsung besar.</p>
+                  </div>
+                  <div class="mini-card">
+                    <div class="icon-head"><i class="fa-solid fa-coins"></i></div>
+                    <h3>Yang dibutuhkan</h3>
+                    <p class="muted">Produk masuk akal, penawaran jelas, dan perputaran uang.</p>
+                  </div>
+                  <div class="mini-card">
+                    <div class="icon-head"><i class="fa-solid fa-repeat"></i></div>
+                    <h3>Goal fase awal</h3>
+                    <p class="muted">Transaksi pertama, transaksi berikutnya, lalu pengulangan.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 15% 80%, rgba(96, 165, 250, 0.2), transparent 24%),
+              linear-gradient(135deg, #031423 0%, #08315f 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-diagram-project"></i> Slide 3</span
+              >
+              <div class="two-col">
+                <div>
+                  <div class="section-title">Rumus dasar cuan harian</div>
+                  <div class="formula-card">
+                    <strong>Produk / jasa + market yang tepat + publikasi yang aktif = peluang transaksi harian</strong>
+                  </div>
+                  <p class="lead" style="margin-top: 18px">
+                    Masalah terbesar biasanya bukan di produknya, tapi pada
+                    distribusi penawaran. Banyak yang punya barang atau jasa,
+                    namun tidak punya ritme publikasi yang konsisten.
+                  </p>
+                </div>
+                <div class="actions">
+                  <div class="action-row">
+                    <span>1</span>
+                    <div>
+                      <strong>Pilih produk paling mudah dijual dulu</strong>
+                      <div class="muted">Prioritaskan yang gampang dipahami dan murah dicoba.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>2</span>
+                    <div>
+                      <strong>Mulai dari market terdekat</strong>
+                      <div class="muted">Database yang kenal kita biasanya closing lebih cepat.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>3</span>
+                    <div>
+                      <strong>Ulangi publikasi secara rutin</strong>
+                      <div class="muted">Orang tidak beli karena sekali lihat, tapi karena cukup sering diingatkan.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 85% 25%, rgba(37, 99, 235, 0.28), transparent 18%),
+              linear-gradient(135deg, #03111d 0%, #0b2140 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-address-book"></i> Slide 4</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Strategi organik: mainkan database yang sudah hangat</div>
+                  <p class="lead">
+                    Organik bukan berarti pasif. Organik berarti memakai aset
+                    relasi, kepercayaan, dan kedekatan yang sudah kita punya
+                    sebelum mengeluarkan biaya iklan.
+                  </p>
+                  <ul class="list">
+                    <li><i class="fa-solid fa-check"></i> Kontak WhatsApp yang pernah berinteraksi</li>
+                    <li><i class="fa-solid fa-check"></i> Grup komunitas yang relevan</li>
+                    <li><i class="fa-solid fa-check"></i> Pelanggan lama yang bisa repeat order</li>
+                    <li><i class="fa-solid fa-check"></i> Teman, rekan, atau kenalan yang sudah percaya</li>
+                  </ul>
+                </div>
+                <div>
+                  <div class="note">
+                    <h3>Prinsip emas</h3>
+                    <p class="muted">
+                      Jangan mulai dari orang paling dingin. Mulailah dari
+                      orang yang paling dekat dengan masalah yang kita tawarkan
+                      untuk diselesaikan.
+                    </p>
+                  </div>
+                  <div class="stat-grid" style="margin-top: 18px">
+                    <div class="mini-card">
+                      <h3>Warm audience</h3>
+                      <p class="muted">Lebih murah, lebih cepat, lebih mudah dites.</p>
+                    </div>
+                    <div class="mini-card">
+                      <h3>Cold audience</h3>
+                      <p class="muted">Butuh edukasi lebih panjang dan pesan lebih tajam.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 12% 18%, rgba(147, 197, 253, 0.18), transparent 22%),
+              linear-gradient(135deg, #06172b 0%, #082d55 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-sack-dollar"></i> Slide 5</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Pola cashflow: murah, cepat, volumenya banyak</div>
+                  <p class="lead">
+                    Harga entry-level bukan berarti menurunkan value. Justru
+                    ini adalah strategi untuk menurunkan friksi dan mempercepat
+                    keputusan beli, terutama ketika target kita adalah transaksi
+                    pertama.
+                  </p>
+                  <div class="formula-card">
+                    <strong>Rp10.000 x 50 pembeli = Rp500.000</strong>
+                  </div>
+                </div>
+                <div class="three-col">
+                  <div class="step-card">
+                    <div class="icon-head"><i class="fa-solid fa-tag"></i></div>
+                    <h3>Low ticket</h3>
+                    <p class="muted">Harga ringan membuat calon pembeli lebih cepat mencoba.</p>
+                  </div>
+                  <div class="step-card">
+                    <div class="icon-head"><i class="fa-solid fa-stopwatch"></i></div>
+                    <h3>Fast closing</h3>
+                    <p class="muted">Keputusan tidak perlu rapat panjang, cukup jelas manfaatnya.</p>
+                  </div>
+                  <div class="step-card">
+                    <div class="icon-head"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>High volume</h3>
+                    <p class="muted">Angka kecil terasa besar saat ritme order bergerak setiap hari.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 78% 20%, rgba(56, 189, 248, 0.22), transparent 20%),
+              linear-gradient(135deg, #031120 0%, #0a2443 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-bullhorn"></i> Slide 6</span
+              >
+              <div class="two-col">
+                <div>
+                  <div class="section-title">Strategi ads: tugas pertama iklan adalah menghentikan scroll</div>
+                  <p class="lead">
+                    Saat pakai iklan, uang keluar lebih dulu. Karena itu pesan
+                    harus lebih tajam, lebih spesifik, dan langsung menyentuh
+                    masalah yang sedang dirasakan audiens.
+                  </p>
+                  <div class="highlight">
+                    Iklan yang cantik belum tentu efektif. Iklan yang menang
+                    biasanya jelas masalahnya, jelas hasilnya, dan jelas alasan
+                    kenapa harus lanjut sekarang.
+                  </div>
+                </div>
+                <div class="actions">
+                  <div class="action-row">
+                    <span>A</span>
+                    <div>
+                      <strong>Hook</strong>
+                      <div class="muted">Kalimat pembuka yang bikin orang berhenti scroll.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>B</span>
+                    <div>
+                      <strong>Problem</strong>
+                      <div class="muted">Masalah yang mereka alami harus terasa dekat dan nyata.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>C</span>
+                    <div>
+                      <strong>Offer</strong>
+                      <div class="muted">Solusi harus sederhana, cepat dipahami, dan ringan dicoba.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 18% 25%, rgba(96, 165, 250, 0.24), transparent 20%),
+              linear-gradient(135deg, #041527 0%, #0c2c52 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-magnet"></i> Slide 7</span
+              >
+              <div class="section-title">Framework hook yang relevan untuk digital marketing</div>
+              <div class="four-col">
+                <div class="mini-card">
+                  <div class="icon-head"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                  <h3>Problem hook</h3>
+                  <p class="muted">"Kesalahan kecil ini bikin jualan sepi terus."</p>
+                </div>
+                <div class="mini-card">
+                  <div class="icon-head"><i class="fa-solid fa-hourglass-half"></i></div>
+                  <h3>Time hook</h3>
+                  <p class="muted">"Cara dapat uang hari ini, bukan bulan depan."</p>
+                </div>
+                <div class="mini-card">
+                  <div class="icon-head"><i class="fa-solid fa-chart-column"></i></div>
+                  <h3>Curiosity hook</h3>
+                  <p class="muted">"Kenapa jualan Rp10.000 justru lebih cepat menghasilkan?"</p>
+                </div>
+                <div class="mini-card">
+                  <div class="icon-head"><i class="fa-solid fa-bolt"></i></div>
+                  <h3>Contrarian hook</h3>
+                  <p class="muted">"Produk murah bukan berarti bisnis murahan."</p>
+                </div>
+              </div>
+              <div class="quote-box" style="margin-top: 22px">
+                Rumus praktis hook: masalah spesifik + hasil yang diinginkan +
+                sudut pandang yang tidak biasa.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 80% 75%, rgba(37, 99, 235, 0.22), transparent 18%),
+              linear-gradient(135deg, #03111e 0%, #092444 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-filter-circle-dollar"></i> Slide 8</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Funnel sederhana untuk cuan harian</div>
+                  <p class="lead">
+                    Agar cashflow tidak hanya sekali lewat, kita butuh alur yang
+                    gampang diulang. Funnel sederhana lebih efektif untuk kelas
+                    pemula daripada sistem yang terlalu kompleks.
+                  </p>
+                  <div class="actions">
+                    <div class="action-row">
+                      <span>1</span>
+                      <div><strong>Traffic</strong><div class="muted">WhatsApp, status, grup, short video, atau iklan.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>2</span>
+                      <div><strong>Offer</strong><div class="muted">Penawaran ringan yang gampang dicoba dulu.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>3</span>
+                      <div><strong>Follow up</strong><div class="muted">Ulangkan benefit, jawab ragu, beri alasan ambil sekarang.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>4</span>
+                      <div><strong>Upsell</strong><div class="muted">Setelah trust muncul, baru naikkan nilai transaksi.</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="formula-card">
+                  <strong>Traffic murah + offer ringan + follow up disiplin = cashflow lebih stabil</strong>
+                  <p class="muted" style="margin-top: 16px">
+                    Ini materi tambahan yang penting: banyak orang fokus cari
+                    traffic, tapi lupa bahwa uang sering masuk justru di tahap
+                    follow up.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 18% 70%, rgba(56, 189, 248, 0.2), transparent 24%),
+              linear-gradient(135deg, #03111d 0%, #0c2a4f 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-scale-balanced"></i> Slide 9</span
+              >
+              <div class="section-title">Perbandingan model lama vs model cashflow</div>
+              <div class="compare">
+                <div class="danger-card">
+                  <div class="icon-head"><i class="fa-solid fa-xmark"></i></div>
+                  <h3>Model lama</h3>
+                  <ul class="list">
+                    <li><i class="fa-solid fa-angle-right"></i> Menunggu closing besar</li>
+                    <li><i class="fa-solid fa-angle-right"></i> Siklus transaksi lebih lambat</li>
+                    <li><i class="fa-solid fa-angle-right"></i> Cashflow sering seret</li>
+                    <li><i class="fa-solid fa-angle-right"></i> Emosi bisnis gampang turun</li>
+                  </ul>
+                </div>
+                <div class="success-card">
+                  <div class="icon-head"><i class="fa-solid fa-check"></i></div>
+                  <h3>Model cashflow</h3>
+                  <ul class="list">
+                    <li><i class="fa-solid fa-angle-right"></i> Banyak closing kecil</li>
+                    <li><i class="fa-solid fa-angle-right"></i> Ritme transaksi lebih cepat</li>
+                    <li><i class="fa-solid fa-angle-right"></i> Uang masuk lebih rutin</li>
+                    <li><i class="fa-solid fa-angle-right"></i> Data pembeli makin cepat terkumpul</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="big-stat" style="margin-top: 22px">
+                <div class="muted">Angka kecil yang berulang lebih sehat daripada angka besar yang jarang datang.</div>
+                <strong>Rp10.000 x 100 = Rp1.000.000</strong>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 82% 22%, rgba(147, 197, 253, 0.18), transparent 22%),
+              linear-gradient(135deg, #041426 0%, #08284d 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-rocket"></i> Slide 10</span
+              >
+              <div class="two-col">
+                <div>
+                  <div class="section-title">Setelah cashflow jalan, baru naik kelas</div>
+                  <p class="lead">
+                    Saat transaksi mulai bergerak, bisnis punya napas. Di titik
+                    ini kita bisa mulai membangun value ladder, repeat order,
+                    dan positioning yang lebih kuat.
+                  </p>
+                  <ul class="list">
+                    <li><i class="fa-solid fa-arrow-trend-up"></i> Naikkan harga secara bertahap</li>
+                    <li><i class="fa-solid fa-box-open"></i> Tambahkan produk kedua atau bundling</li>
+                    <li><i class="fa-solid fa-people-group"></i> Bangun grup atau channel sendiri</li>
+                    <li><i class="fa-solid fa-comments"></i> Rutin follow up dan minta testimoni</li>
+                  </ul>
+                </div>
+                <div class="timeline-card">
+                  <h3>Value ladder sederhana</h3>
+                  <div class="actions">
+                    <div class="action-row">
+                      <span>1</span>
+                      <div><strong>Entry offer</strong><div class="muted">Harga ringan untuk memancing pembelian pertama.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>2</span>
+                      <div><strong>Core offer</strong><div class="muted">Produk utama dengan manfaat lebih lengkap.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>3</span>
+                      <div><strong>Repeat / upsell</strong><div class="muted">Layanan lanjutan, membership, atau pendampingan.</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 18% 18%, rgba(37, 99, 235, 0.24), transparent 20%),
+              linear-gradient(135deg, #03111f 0%, #0a2442 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-triangle-exclamation"></i> Slide 11</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Kesalahan yang harus dihindari</div>
+                  <div class="three-col">
+                    <div class="mini-card">
+                      <div class="icon-head"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                      <h3>Terlalu lama menunggu sempurna</h3>
+                      <p class="muted">Penjualan butuh aksi, bukan hanya persiapan.</p>
+                    </div>
+                    <div class="mini-card">
+                      <div class="icon-head"><i class="fa-solid fa-palette"></i></div>
+                      <h3>Fokus desain, lupa jualan</h3>
+                      <p class="muted">Visual penting, tapi cashflow tetap nomor satu.</p>
+                    </div>
+                    <div class="mini-card">
+                      <div class="icon-head"><i class="fa-solid fa-database"></i></div>
+                      <h3>Tidak membangun database</h3>
+                      <p class="muted">Padahal database adalah aset utama pemasaran murah.</p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div class="note">
+                    <h3>Checklist cepat</h3>
+                    <ul class="list">
+                      <li><i class="fa-solid fa-check"></i> Apakah penawaran saya jelas?</li>
+                      <li><i class="fa-solid fa-check"></i> Apakah target saya spesifik?</li>
+                      <li><i class="fa-solid fa-check"></i> Apakah ada follow up setelah publikasi?</li>
+                      <li><i class="fa-solid fa-check"></i> Apakah saya mengukur respon tiap hari?</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 85% 25%, rgba(56, 189, 248, 0.22), transparent 20%),
+              linear-gradient(135deg, #041425 0%, #0d315b 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-list-check"></i> Slide 12</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Tugas praktik hari ini</div>
+                  <div class="actions">
+                    <div class="action-row">
+                      <span>1</span>
+                      <div><strong>Ambil 50 kontak WhatsApp</strong><div class="muted">Pilih yang paling relevan dengan produk.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>2</span>
+                      <div><strong>Pilih 1 produk murah</strong><div class="muted">Fokus pada produk yang gampang dijelaskan manfaatnya.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>3</span>
+                      <div><strong>Buat 1 kalimat penawaran</strong><div class="muted">Jangan panjang, tapi harus jelas masalah dan solusinya.</div></div>
+                    </div>
+                    <div class="action-row">
+                      <span>4</span>
+                      <div><strong>Kirim dan catat respon</strong><div class="muted">Respon adalah data untuk memperbaiki offer berikutnya.</div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="script-card">
+                  <h3>Contoh script WhatsApp</h3>
+                  Assalamualaikum, izin info ya.<br /><br />
+                  Hari ini saya ada program sederhana untuk yang ingin mulai
+                  belajar menghasilkan uang harian dari internet.<br /><br />
+                  Biayanya ringan, hanya Rp10.000, tapi materinya langsung
+                  praktik: cara jualan ke database sendiri, cara bikin
+                  penawaran, dan cara mulai dapat cashflow.<br /><br />
+                  Kalau berkenan, saya kirim detail infonya ya?
+                </div>
+              </div>
+              <div class="quote-box" style="margin-top: 22px">
+                Cashflow dulu, besar kemudian. Mulai dari penawaran kecil yang
+                bisa dijalankan hari ini juga.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
+          class="slide"
+          style="
+            --bg-image:
+              radial-gradient(circle at 18% 22%, rgba(147, 197, 253, 0.22), transparent 22%),
+              radial-gradient(circle at 80% 78%, rgba(56, 189, 248, 0.18), transparent 20%),
+              linear-gradient(135deg, #031120 0%, #0c3364 52%, #031120 100%);
+          "
+        >
+          <div class="content">
+            <div class="panel hero-panel">
+              <span class="eyebrow"
+                ><i class="fa-solid fa-flag-checkered"></i> Slide 13</span
+              >
+              <div class="split-grid">
+                <div>
+                  <div class="section-title">Konklusi & key takeaways</div>
+                  <p class="lead">
+                    Inti dari materi ini sederhana: jangan tunggu bisnis terasa
+                    sempurna untuk mulai bergerak. Bangun cashflow dulu dengan
+                    offer yang ringan, market yang tepat, dan ritme publikasi
+                    yang konsisten.
+                  </p>
+                  <div class="quote-box">
+                    Bisnis yang sehat di fase awal bukan yang paling mewah
+                    tampilannya, tetapi yang paling rutin menghasilkan transaksi
+                    dan data pembeli.
+                  </div>
+                </div>
+                <div class="actions">
+                  <div class="action-row">
+                    <span>1</span>
+                    <div>
+                      <strong>Cashflow lebih penting daripada gengsi</strong>
+                      <div class="muted">Closing kecil yang rutin membangun napas bisnis.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>2</span>
+                    <div>
+                      <strong>Database adalah aset digital marketing</strong>
+                      <div class="muted">Warm audience biasanya jadi sumber penjualan tercepat.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>3</span>
+                    <div>
+                      <strong>Hook, offer, dan follow up harus jalan bersama</strong>
+                      <div class="muted">Traffic tanpa follow up sering hanya jadi perhatian sesaat.</div>
+                    </div>
+                  </div>
+                  <div class="action-row">
+                    <span>4</span>
+                    <div>
+                      <strong>Mulai kecil, ukur respon, lalu naik kelas</strong>
+                      <div class="muted">Perbaikan bertahap jauh lebih efektif daripada menunggu ideal.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="cta-group">
+                <a
+                  class="cta-link primary"
+                  href="https://wa.me/6281384072641"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-brands fa-whatsapp"></i> Konsultasi Digital
+                </a>
+                <a
+                  class="cta-link"
+                  href="https://carisolusi.biz.id"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i class="fa-solid fa-globe"></i> Kembali ke Website Utama
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer-nav">
+        <div class="nav-shell">
+          <div class="nav-buttons">
+            <button type="button" id="prevBtn">
+              <i class="fa-solid fa-arrow-left"></i> Prev
+            </button>
+            <button type="button" class="primary" id="nextBtn">
+              Next <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const progressBar = document.getElementById('progressBar');
+      const counter = document.getElementById('counter');
+      const prevBtn = document.getElementById('prevBtn');
+      const nextBtn = document.getElementById('nextBtn');
+      const mobileMode = window.matchMedia('(max-width: 980px)');
+      let current = 0;
+      let touchStartY = 0;
+
+      const updateSlide = (index) => {
+        current = Math.max(0, Math.min(index, slides.length - 1));
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('active', idx === current);
+        });
+
+        const progress = ((current + 1) / slides.length) * 100;
+        progressBar.style.width = `${progress}%`;
+        counter.textContent = `Slide ${current + 1} / ${slides.length}`;
+
+        const activeContent = slides[current]?.querySelector('.content');
+        if (activeContent) activeContent.scrollTop = 0;
+      };
+
+      const nextSlide = () => updateSlide(current + 1);
+      const prevSlide = () => updateSlide(current - 1);
+
+      prevBtn.addEventListener('click', prevSlide);
+      nextBtn.addEventListener('click', nextSlide);
+
+      window.addEventListener('keydown', (event) => {
+        if (mobileMode.matches) return;
+        if (event.key === 'ArrowRight' || event.key === 'PageDown') nextSlide();
+        if (event.key === 'ArrowLeft' || event.key === 'PageUp') prevSlide();
+      });
+
+      window.addEventListener(
+        'wheel',
+        (event) => {
+          if (mobileMode.matches) return;
+          if (Math.abs(event.deltaY) < 20) return;
+          if (event.deltaY > 0) nextSlide();
+          if (event.deltaY < 0) prevSlide();
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'touchstart',
+        (event) => {
+          touchStartY = event.changedTouches[0].screenY;
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        'touchend',
+        (event) => {
+          const touchEndY = event.changedTouches[0].screenY;
+          const delta = touchStartY - touchEndY;
+          if (Math.abs(delta) < 40) return;
+          if (delta > 0) nextSlide();
+          if (delta < 0) prevSlide();
+        },
+        { passive: true }
+      );
+
+      mobileMode.addEventListener('change', () => updateSlide(current));
+      updateSlide(0);
+    </script>
+  </body>
+</html>
