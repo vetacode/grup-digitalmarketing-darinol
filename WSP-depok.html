@@ -1,0 +1,1451 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSEO Depok - Website yang Menghasilkan Pelanggan</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"
+    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      * {
+        font-family:
+          'Inter',
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script>
+      const { useState, useEffect, useRef } = React;
+      const e = React.createElement;
+
+      function useInView(threshold = 0.15) {
+        const ref = useRef(null);
+        const [inView, setInView] = useState(false);
+        useEffect(() => {
+          const obs = new IntersectionObserver(
+            ([entry]) => {
+              if (entry.isIntersecting) setInView(true);
+            },
+            { threshold },
+          );
+          if (ref.current) obs.observe(ref.current);
+          return () => obs.disconnect();
+        }, [threshold]);
+        return { ref, inView };
+      }
+
+      function FadeIn({ children, delay = 0, className = '' }) {
+        const { ref, inView } = useInView();
+        return React.createElement(
+          'div',
+          {
+            ref,
+            className,
+            style: {
+              opacity: inView ? 1 : 0,
+              transform: inView ? 'translateY(0)' : 'translateY(28px)',
+              transition: `opacity 0.65s ease ${delay}ms, transform 0.65s ease ${delay}ms`,
+            },
+          },
+          children,
+        );
+      }
+
+      function iconElement(Icon, props) {
+        return e(Icon, props);
+      }
+
+      // SVG Icons (inline)
+      const Icons = {
+        TrendingUp: ({ size = 20 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('polyline', { points: '23 6 13.5 15.5 8.5 10.5 1 18' }),
+            e('polyline', { points: '17 6 23 6 23 12' }),
+          ),
+        Phone: ({ size = 15 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('path', {
+              d: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z',
+            }),
+          ),
+        BarChart2: ({ size = 14 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('line', { x1: '12', y1: '2', x2: '12', y2: '22' }),
+            e('path', {
+              d: 'M17 5H9.5a1.5 1.5 0 0 0-1.5 1.5v12a1.5 1.5 0 0 0 1.5 1.5H17',
+            }),
+            e('path', {
+              d: 'M21 12a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z',
+            }),
+          ),
+        Search: ({ size = 20 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('circle', { cx: '11', cy: '11', r: '8' }),
+            e('path', { d: 'm21 21-4.35-4.35' }),
+          ),
+        Target: ({ size = 20 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('circle', { cx: '12', cy: '12', r: '1' }),
+            e('circle', { cx: '12', cy: '12', r: '5' }),
+            e('circle', { cx: '12', cy: '12', r: '9' }),
+          ),
+        Globe: ({ size = 28 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('circle', { cx: '12', cy: '12', r: '10' }),
+            e('path', { d: 'M2 12h20' }),
+            e('path', {
+              d: 'M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z',
+            }),
+          ),
+        AlertTriangle: ({ size = 20 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('path', {
+              d: 'M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3.05h16.94a2 2 0 0 0 1.71-3.05L13.71 3.86a2 2 0 0 0-3.42 0z',
+            }),
+            e('line', { x1: '12', y1: '9', x2: '12', y2: '13' }),
+            e('line', { x1: '12', y1: '17', x2: '12.01', y2: '17' }),
+          ),
+        CheckCircle: ({ size = 16 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('path', { d: 'M22 11.08V12a10 10 0 1 1-5.93-9.14' }),
+            e('polyline', { points: '22 4 12 14.01 9 11.01' }),
+          ),
+        XCircle: ({ size = 16 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('circle', { cx: '12', cy: '12', r: '10' }),
+            e('line', { x1: '15', y1: '9', x2: '9', y2: '15' }),
+            e('line', { x1: '9', y1: '9', x2: '15', y2: '15' }),
+          ),
+        Clock: ({ size = 22 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('circle', { cx: '12', cy: '12', r: '10' }),
+            e('polyline', { points: '12 6 12 12 16 14' }),
+          ),
+        Star: ({ size = 22 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'currentColor',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('polygon', {
+              points:
+                '12 2 15.09 10.26 24 10.26 17.55 16.16 19.64 24.42 12 18.52 4.36 24.42 6.45 16.16 0 10.26 8.91 10.26 12 2',
+            }),
+          ),
+        Users: ({ size = 22 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('path', { d: 'M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2' }),
+            e('circle', { cx: '9', cy: '7', r: '4' }),
+            e('path', { d: 'M23 21v-2a4 4 0 0 0-3-3.87' }),
+            e('path', { d: 'M16 3.13a4 4 0 0 1 0 7.75' }),
+          ),
+        Zap: ({ size = 22 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('polygon', { points: '13 2 3 14 12 14 11 22 21 10 12 10 13 2' }),
+          ),
+        MessageSquare: ({ size = 32 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('path', {
+              d: 'M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z',
+            }),
+          ),
+        ChevronDown: ({ size = 20 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('polyline', { points: '6 9 12 15 18 9' }),
+          ),
+        ArrowRight: ({ size = 18 }) =>
+          e(
+            'svg',
+            {
+              width: size,
+              height: size,
+              viewBox: '0 0 24 24',
+              fill: 'none',
+              stroke: 'currentColor',
+              strokeWidth: '2',
+            },
+            e('line', { x1: '5', y1: '12', x2: '19', y2: '12' }),
+            e('polyline', { points: '12 5 19 12 12 19' }),
+          ),
+      };
+
+      const mistakes = [
+        {
+          icon: iconElement(Icons.Globe, { size: 28 }),
+          title: 'Website Dibuat untuk "Ada-Adaan"',
+          why: 'Banyak pemilik usaha membuat website karena merasa "harus punya", bukan karena punya strategi. Hasilnya? Website tampak bagus, tapi tidak dirancang untuk menjual. Tidak ada alur yang menuntun pengunjung dari datang hingga menghubungi Anda.',
+          deeper:
+            'Ini seperti membuka toko tapi tidak memasang papan nama, tidak menata produk, dan tidak ada kasir. Orang masuk, bingung, lalu pergi.',
+          color: 'from-red-50 to-orange-50',
+          border: 'border-red-200',
+          iconColor: 'text-red-500',
+        },
+        {
+          icon: iconElement(Icons.Search, { size: 28 }),
+          title: 'Tidak Muncul di Google',
+          why: 'Google memproses lebih dari 8,5 miliar pencarian per hari. Di Depok saja, ribuan orang setiap bulannya mengetik "jasa renovasi Depok", "catering Depok", "jasa desain Depok". Jika website Anda tidak muncul di halaman pertama, secara praktis Anda tidak ada.',
+          deeper:
+            '75% pengguna Google tidak pernah scroll ke halaman kedua. Artinya: jika Anda ada di halaman 2, sama saja dengan tidak ada. Calon pelanggan Anda sudah menghubungi kompetitor Anda sebelum menemukan Anda.',
+          color: 'from-amber-50 to-yellow-50',
+          border: 'border-amber-200',
+          iconColor: 'text-amber-500',
+        },
+        {
+          icon: iconElement(Icons.Target, { size: 28 }),
+          title: 'Tidak Menargetkan Keyword yang Tepat',
+          why: 'Ada perbedaan besar antara orang yang googling "tips renovasi rumah" vs "jasa renovasi rumah Depok". Yang pertama hanya cari informasi. Yang kedua sedang siap bayar. Jika website Anda tidak muncul untuk keyword transaksional seperti ini, Anda kehilangan pembeli, bukan sekadar pembaca.',
+          deeper:
+            'Keyword yang salah = traffic yang salah. Anda bisa dapat ribuan pengunjung tapi nol pelanggan. Ini membuang uang dan energi Anda sia-sia.',
+          color: 'from-blue-50 to-cyan-50',
+          border: 'border-blue-200',
+          iconColor: 'text-blue-500',
+        },
+      ];
+
+      const psychologyPoints = [
+        {
+          icon: iconElement(Icons.Clock, { size: 22 }),
+          title: '3 Detik untuk Memutuskan',
+          desc: 'Pengunjung membutuhkan rata-rata 3 detik untuk memutuskan apakah mereka akan tinggal atau pergi. Jika halaman pertama website Anda tidak langsung menjawab "Anda bisa membantu saya dengan apa?", mereka akan pergi selamanya.',
+        },
+        {
+          icon: iconElement(Icons.Star, { size: 22 }),
+          title: 'Kepercayaan adalah Mata Uang Utama',
+          desc: 'Orang tidak membeli dari website yang tidak mereka percaya. Testimoni, portofolio, dan penjelasan yang jelas membangun kepercayaan. Tanpanya, calon pelanggan memilih kompetitor yang terlihat lebih terpercaya.',
+        },
+        {
+          icon: iconElement(Icons.Users, { size: 22 }),
+          title: 'Pembeli Mencari Solusi, Bukan Profil',
+          desc: 'Pengunjung tidak peduli seberapa bagus desain logo Anda. Mereka peduli: "Apakah ini bisa menyelesaikan masalah saya?" Website yang berfokus pada manfaat untuk pelanggan — bukan pada kehebatan perusahaan — jauh lebih banyak menghasilkan closing.',
+        },
+        {
+          icon: iconElement(Icons.Zap, { size: 22 }),
+          title: 'Kecepatan = Uang',
+          desc: 'Setiap tambahan 1 detik loading time mengurangi konversi hingga 7%. Website yang lambat bukan hanya buruk untuk SEO, tapi juga langsung membakar uang Anda karena pengunjung langsung pergi sebelum halaman selesai dimuat.',
+        },
+      ];
+
+      const stats = [
+        {
+          value: '75%',
+          label: 'pengguna tidak pernah scroll ke halaman 2 Google',
+        },
+        {
+          value: '3 dtk',
+          label: 'waktu pengunjung memutuskan tinggal atau pergi',
+        },
+        {
+          value: '7%',
+          label: 'penurunan konversi per 1 detik loading tambahan',
+        },
+        {
+          value: '61%',
+          label: 'pencarian lokal berujung pembelian dalam 24 jam',
+        },
+      ];
+
+      const steps = [
+        {
+          num: '01',
+          title: 'Audit Website & Keyword',
+          desc: 'Kami analisis kondisi website Anda sekarang dan temukan keyword transaksional yang paling potensial untuk bisnis Anda di area Depok.',
+        },
+        {
+          num: '02',
+          title: 'Optimasi SEO On-Page',
+          desc: 'Struktur konten, meta tag, kecepatan halaman, dan semua elemen teknis dioptimasi agar Google menempatkan Anda di halaman pertama.',
+        },
+        {
+          num: '03',
+          title: 'Bangun Alur Konversi',
+          desc: 'Kami rancang struktur halaman dengan psikologi penjualan: dari menarik perhatian, membangun kepercayaan, hingga mendorong closing.',
+        },
+        {
+          num: '04',
+          title: 'Pantau & Optimalkan',
+          desc: 'Laporan rutin performa keyword, traffic, dan konversi — sehingga Anda tahu persis mana yang bekerja dan mana yang perlu ditingkatkan.',
+        },
+      ];
+
+      const faqs = [
+        {
+          q: 'Berapa lama baru bisa muncul di halaman 1 Google?',
+          a: 'Untuk keyword lokal seperti "jasa [X] Depok", umumnya 4–12 minggu tergantung tingkat persaingan. Beberapa keyword dengan kompetisi rendah bisa lebih cepat.',
+        },
+        {
+          q: 'Apakah website saya yang sekarang bisa dioptimasi, atau harus buat baru?',
+          a: 'Sebagian besar kasus bisa dioptimasi tanpa membuat dari nol. Kami akan audit terlebih dahulu dan memberi rekomendasi yang paling efisien secara biaya.',
+        },
+        {
+          q: 'Apa bedanya SEO dengan iklan Google Ads?',
+          a: 'Google Ads berbayar per klik dan berhenti segera ketika anggaran habis. SEO adalah investasi jangka panjang — begitu Anda ranking, traffic datang terus-menerus tanpa biaya per klik.',
+        },
+        {
+          q: 'Apakah cocok untuk bisnis kecil di Depok?',
+          a: 'Justru SEO lokal sangat ideal untuk UMKM. Persaingan keyword lokal jauh lebih rendah dari keyword nasional, tapi kualitas trafficnya sangat tinggi karena sangat tersegmentasi.',
+        },
+      ];
+
+      function App() {
+        const [openFaq, setOpenFaq] = useState(null);
+
+        return React.createElement(
+          'div',
+          { className: 'min-h-screen bg-white text-gray-900' },
+
+          // NAV
+          React.createElement(
+            'nav',
+            {
+              className:
+                'fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100',
+            },
+            React.createElement(
+              'div',
+              {
+                className:
+                  'max-w-6xl mx-auto px-6 py-4 flex items-center justify-between',
+              },
+              React.createElement(
+                'div',
+                { className: 'flex items-center gap-2' },
+                React.createElement(
+                  'div',
+                  {
+                    className:
+                      'w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white',
+                  },
+                  React.createElement(Icons.TrendingUp, null),
+                ),
+                React.createElement(
+                  'span',
+                  { className: 'font-bold text-gray-900 text-lg' },
+                  'WebSEO',
+                  React.createElement(
+                    'span',
+                    { className: 'text-blue-600' },
+                    'Depok',
+                  ),
+                ),
+              ),
+              React.createElement(
+                'a',
+                {
+                  href: '#konsultasi',
+                  className:
+                    'bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors flex items-center gap-2',
+                },
+                React.createElement(Icons.Phone, { size: 15 }),
+                'Konsultasi Gratis',
+              ),
+            ),
+          ),
+
+          // HERO
+          React.createElement(
+            'section',
+            {
+              className:
+                'pt-28 pb-24 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-blue-950 text-white relative overflow-hidden',
+            },
+            React.createElement('div', {
+              className: 'absolute inset-0 opacity-10',
+              style: {
+                backgroundImage:
+                  'radial-gradient(circle at 20% 50%, #3b82f6 0%, transparent 50%), radial-gradient(circle at 80% 20%, #1e40af 0%, transparent 40%)',
+              },
+            }),
+            React.createElement(
+              'div',
+              { className: 'max-w-4xl mx-auto text-center relative z-10' },
+              React.createElement(
+                'div',
+                {
+                  className:
+                    'inline-flex items-center gap-2 bg-blue-600/20 border border-blue-500/30 text-blue-300 text-sm font-medium px-4 py-2 rounded-full mb-8',
+                },
+                React.createElement(Icons.BarChart2, { size: 14 }),
+                'Fakta Tentang Website Bisnis di Indonesia',
+              ),
+              React.createElement(
+                'h1',
+                {
+                  className:
+                    'text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-6',
+                },
+                'Kenapa Website Anda ',
+                React.createElement('br', null),
+                React.createElement(
+                  'span',
+                  { className: 'text-blue-400' },
+                  'Tidak Menghasilkan',
+                ),
+                React.createElement('br', null),
+                'Satu Pun Pelanggan?',
+              ),
+              React.createElement(
+                'p',
+                {
+                  className:
+                    'text-gray-300 text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10',
+                },
+                'Setiap hari, ribuan orang di Depok mencari bisnis seperti Anda di Google. Tapi mereka menemukan kompetitor Anda — bukan Anda. Ini bukan soal nasib. Ini soal strategi yang salah dari awal.',
+              ),
+              React.createElement(
+                'div',
+                { className: 'flex flex-col sm:flex-row gap-4 justify-center' },
+                React.createElement(
+                  'a',
+                  {
+                    href: '#masalah',
+                    className:
+                      'bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 group',
+                  },
+                  'Pelajari Penyebabnya',
+                  React.createElement(Icons.ArrowRight, {
+                    size: 18,
+                    className: 'group-hover:translate-x-1 transition-transform',
+                  }),
+                ),
+                React.createElement(
+                  'a',
+                  {
+                    href: '#konsultasi',
+                    className:
+                      'bg-white/10 border border-white/20 hover:bg-white/20 text-white font-semibold px-8 py-4 rounded-xl transition-all',
+                  },
+                  'Audit Website Gratis',
+                ),
+              ),
+            ),
+            React.createElement('div', {
+              className:
+                'absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent',
+            }),
+          ),
+
+          // STATS
+          React.createElement(
+            'section',
+            { className: 'py-14 px-6 bg-white border-b border-gray-100' },
+            React.createElement(
+              'div',
+              {
+                className:
+                  'max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8',
+              },
+              stats.map((s, i) =>
+                React.createElement(
+                  FadeIn,
+                  { key: i, delay: i * 80, className: 'text-center' },
+                  React.createElement(
+                    'div',
+                    {
+                      className:
+                        'text-3xl md:text-4xl font-extrabold text-blue-600 mb-1',
+                    },
+                    s.value,
+                  ),
+                  React.createElement(
+                    'div',
+                    { className: 'text-gray-500 text-sm leading-snug' },
+                    s.label,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // MISTAKES SECTION
+          React.createElement(
+            'section',
+            { id: 'masalah', className: 'py-20 px-6 bg-gray-50' },
+            React.createElement(
+              'div',
+              { className: 'max-w-5xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-3' },
+                React.createElement(
+                  'span',
+                  {
+                    className:
+                      'text-blue-600 font-semibold text-sm uppercase tracking-widest',
+                  },
+                  'Akar Masalahnya',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-5' },
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-gray-900',
+                  },
+                  '5 Alasan Mengapa Website Anda Gagal',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 120, className: 'text-center mb-16' },
+                React.createElement(
+                  'p',
+                  { className: 'text-gray-500 text-lg max-w-2xl mx-auto' },
+                  'Ini bukan soal desain yang jelek atau konten yang kurang. Masalahnya jauh lebih mendasar — dan lebih mudah diperbaiki dari yang Anda kira.',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'space-y-6' },
+                mistakes.map((m, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 100 },
+                    React.createElement(
+                      'div',
+                      {
+                        className: `bg-gradient-to-br ${m.color} border ${m.border} rounded-2xl p-8`,
+                      },
+                      React.createElement(
+                        'div',
+                        { className: 'flex items-start gap-5' },
+                        React.createElement(
+                          'div',
+                          { className: `${m.iconColor} mt-1 flex-shrink-0` },
+                          m.icon,
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: 'flex-1' },
+                          React.createElement(
+                            'div',
+                            { className: 'mb-2' },
+                            React.createElement(
+                              'span',
+                              {
+                                className:
+                                  'text-xs font-bold text-gray-400 uppercase tracking-widest',
+                              },
+                              `Kesalahan #${i + 1}`,
+                            ),
+                          ),
+                          React.createElement(
+                            'h3',
+                            {
+                              className: 'text-xl font-bold text-gray-900 mb-3',
+                            },
+                            m.title,
+                          ),
+                          React.createElement(
+                            'p',
+                            { className: 'text-gray-700 leading-relaxed mb-4' },
+                            m.why,
+                          ),
+                          React.createElement(
+                            'div',
+                            {
+                              className:
+                                'bg-white/70 border border-white rounded-xl p-4',
+                            },
+                            React.createElement(
+                              'p',
+                              {
+                                className:
+                                  'text-sm text-gray-600 leading-relaxed',
+                              },
+                              React.createElement(
+                                'span',
+                                { className: 'font-semibold text-gray-800' },
+                                'Analoginya: ',
+                              ),
+                              m.deeper,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // PSYCHOLOGY SECTION
+          React.createElement(
+            'section',
+            { className: 'py-20 px-6 bg-white' },
+            React.createElement(
+              'div',
+              { className: 'max-w-5xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-3' },
+                React.createElement(
+                  'span',
+                  {
+                    className:
+                      'text-blue-600 font-semibold text-sm uppercase tracking-widest',
+                  },
+                  'Psikologi Pembeli Online',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-5' },
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-gray-900',
+                  },
+                  'Cara Pikir Calon Pelanggan Anda',
+                  React.createElement('br', { className: 'hidden md:block' }),
+                  ' Saat Browsing Google',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 120, className: 'text-center mb-14' },
+                React.createElement(
+                  'p',
+                  { className: 'text-gray-500 text-lg max-w-2xl mx-auto' },
+                  'Memahami psikologi pembeli adalah kunci. Karena website yang berhasil dirancang bukan berdasarkan selera pemiliknya, tapi berdasarkan cara otak calon pelanggan bekerja.',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'grid md:grid-cols-2 gap-6' },
+                psychologyPoints.map((p, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 100 },
+                    React.createElement(
+                      'div',
+                      {
+                        className:
+                          'border border-gray-200 rounded-2xl p-7 hover:border-blue-300 hover:shadow-md transition-all',
+                      },
+                      React.createElement(
+                        'div',
+                        { className: 'flex items-center gap-3 mb-4' },
+                        React.createElement(
+                          'div',
+                          {
+                            className:
+                              'w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600',
+                          },
+                          p.icon,
+                        ),
+                        React.createElement(
+                          'h3',
+                          { className: 'font-bold text-gray-900 text-lg' },
+                          p.title,
+                        ),
+                      ),
+                      React.createElement(
+                        'p',
+                        { className: 'text-gray-600 leading-relaxed' },
+                        p.desc,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // REAL COST SECTION
+          React.createElement(
+            'section',
+            {
+              className:
+                'py-20 px-6 bg-gradient-to-br from-gray-900 to-blue-950 text-white',
+            },
+            React.createElement(
+              'div',
+              { className: 'max-w-4xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-5' },
+                React.createElement(
+                  'h2',
+                  { className: 'text-3xl md:text-4xl font-extrabold' },
+                  'Berapa Besar Kerugian yang',
+                  React.createElement('br', { className: 'hidden md:block' }),
+                  ' Anda Tanggung Setiap Bulan?',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-14' },
+                React.createElement(
+                  'p',
+                  { className: 'text-gray-400 text-lg max-w-2xl mx-auto' },
+                  'Website yang tidak menghasilkan bukan hanya "tidak untung". Setiap hari, ada biaya tersembunyi yang terus berjalan.',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'grid md:grid-cols-3 gap-6' },
+                [
+                  {
+                    title: 'Biaya Hosting & Domain',
+                    desc: 'Anda membayar biaya tahunan untuk website yang tidak membawa satu pun pelanggan. Uang yang keluar tanpa imbal hasil.',
+                  },
+                  {
+                    title: 'Peluang yang Hilang',
+                    desc: 'Setiap hari ada orang mencari jasa Anda di Depok dan menemukan kompetitor. Potensi omzet itu sudah jatuh ke tangan orang lain.',
+                  },
+                  {
+                    title: 'Waktu & Energi Terbuang',
+                    desc: 'Waktu yang sudah Anda investasikan untuk membuat dan memaintain website — tanpa hasil — adalah kerugian nyata yang tidak bisa dikembalikan.',
+                  },
+                ].map((item, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 100 },
+                    React.createElement(
+                      'div',
+                      {
+                        className:
+                          'bg-white/5 border border-white/10 rounded-2xl p-7',
+                      },
+                      React.createElement(
+                        'div',
+                        {
+                          className:
+                            'w-10 h-10 bg-red-500/20 rounded-xl flex items-center justify-center mb-4',
+                        },
+                        React.createElement(Icons.AlertTriangle, {
+                          size: 20,
+                          className: 'text-red-400',
+                        }),
+                      ),
+                      React.createElement(
+                        'h3',
+                        { className: 'font-bold text-white text-lg mb-3' },
+                        item.title,
+                      ),
+                      React.createElement(
+                        'p',
+                        { className: 'text-gray-400 text-sm leading-relaxed' },
+                        item.desc,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // KEYWORDS SECTION
+          React.createElement(
+            'section',
+            { className: 'py-20 px-6 bg-gray-50' },
+            React.createElement(
+              'div',
+              { className: 'max-w-5xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-3' },
+                React.createElement(
+                  'span',
+                  {
+                    className:
+                      'text-blue-600 font-semibold text-sm uppercase tracking-widest',
+                  },
+                  'Ini Tentang Anda',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-5' },
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-gray-900',
+                  },
+                  'Setiap Hari Ada Orang di Depok',
+                  React.createElement('br', { className: 'hidden md:block' }),
+                  ' yang Mencari Bisnis Seperti Anda',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 120, className: 'text-center mb-14' },
+                React.createElement(
+                  'p',
+                  { className: 'text-gray-500 text-lg max-w-2xl mx-auto' },
+                  'Mereka tidak mengetik nama bisnis Anda. Mereka mengetik masalah mereka. Dan Google yang memutuskan siapa yang layak menjawab.',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'grid sm:grid-cols-2 md:grid-cols-3 gap-5' },
+                [
+                  {
+                    keyword: '"jasa renovasi rumah Depok"',
+                    volume: '1.200+ pencarian/bln',
+                    label: 'Properti',
+                  },
+                  {
+                    keyword: '"catering Depok murah"',
+                    volume: '900+ pencarian/bln',
+                    label: 'Kuliner',
+                  },
+                  {
+                    keyword: '"jasa desain interior Depok"',
+                    volume: '600+ pencarian/bln',
+                    label: 'Desain',
+                  },
+                  {
+                    keyword: '"jasa digital marketing Depok"',
+                    volume: '800+ pencarian/bln',
+                    label: 'Digital',
+                  },
+                  {
+                    keyword: '"toko furniture Depok"',
+                    volume: '1.500+ pencarian/bln',
+                    label: 'Retail',
+                  },
+                  {
+                    keyword: '"laundry kiloan Depok"',
+                    volume: '2.000+ pencarian/bln',
+                    label: 'Jasa',
+                  },
+                ].map((kw, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 80 },
+                    React.createElement(
+                      'div',
+                      {
+                        className:
+                          'bg-white border border-gray-200 rounded-xl p-5 hover:border-blue-300 hover:shadow-sm transition-all',
+                      },
+                      React.createElement(
+                        'div',
+                        { className: 'flex items-center justify-between mb-3' },
+                        React.createElement(
+                          'span',
+                          {
+                            className:
+                              'text-xs font-semibold text-gray-400 uppercase tracking-wide bg-gray-100 px-2 py-1 rounded-full',
+                          },
+                          kw.label,
+                        ),
+                        React.createElement(Icons.Search, {
+                          size: 14,
+                          className: 'text-gray-300',
+                        }),
+                      ),
+                      React.createElement(
+                        'div',
+                        {
+                          className:
+                            'font-mono text-sm font-semibold text-gray-800 mb-3 leading-snug',
+                        },
+                        kw.keyword,
+                      ),
+                      React.createElement(
+                        'div',
+                        {
+                          className:
+                            'text-xs text-blue-600 font-semibold bg-blue-50 inline-block px-2 py-1 rounded-full',
+                        },
+                        kw.volume,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 200, className: 'mt-10 text-center' },
+                React.createElement(
+                  'p',
+                  { className: 'text-gray-600 text-base' },
+                  'Jika website Anda tidak muncul untuk keyword ini, ',
+                  React.createElement(
+                    'span',
+                    { className: 'font-bold text-gray-900' },
+                    'kompetitor Anda yang mendapat pelanggannya',
+                  ),
+                  ' — setiap hari, tanpa henti.',
+                ),
+              ),
+            ),
+          ),
+
+          // SOLUTION SECTION
+          React.createElement(
+            'section',
+            { className: 'py-20 px-6 bg-white' },
+            React.createElement(
+              'div',
+              { className: 'max-w-5xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-3' },
+                React.createElement(
+                  'span',
+                  {
+                    className:
+                      'text-blue-600 font-semibold text-sm uppercase tracking-widest',
+                  },
+                  'Solusinya',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-5' },
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-gray-900',
+                  },
+                  'Bagaimana Kami Mengubah Website Anda',
+                  React.createElement('br', { className: 'hidden md:block' }),
+                  ' Menjadi Mesin Penjualan',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 120, className: 'text-center mb-16' },
+                React.createElement(
+                  'p',
+                  { className: 'text-gray-500 text-lg max-w-2xl mx-auto' },
+                  'Kami tidak hanya "mempercantik" website Anda. Kami membangun sistem yang bekerja 24 jam, 7 hari seminggu, mendatangkan calon pelanggan yang sudah siap beli.',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'space-y-5' },
+                steps.map((step, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 100 },
+                    React.createElement(
+                      'div',
+                      {
+                        className:
+                          'flex items-start gap-6 p-7 border border-gray-200 rounded-2xl hover:border-blue-300 hover:shadow-md transition-all bg-white',
+                      },
+                      React.createElement(
+                        'div',
+                        {
+                          className:
+                            'flex-shrink-0 text-4xl font-extrabold text-blue-100 leading-none select-none',
+                        },
+                        step.num,
+                      ),
+                      React.createElement(
+                        'div',
+                        null,
+                        React.createElement(
+                          'h3',
+                          { className: 'text-lg font-bold text-gray-900 mb-2' },
+                          step.title,
+                        ),
+                        React.createElement(
+                          'p',
+                          { className: 'text-gray-600 leading-relaxed' },
+                          step.desc,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // TESTIMONIALS SECTION
+          React.createElement(
+            'section',
+            { className: 'py-20 px-6 bg-gray-50' },
+            React.createElement(
+              'div',
+              { className: 'max-w-5xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-3' },
+                React.createElement(
+                  'span',
+                  {
+                    className:
+                      'text-blue-600 font-semibold text-sm uppercase tracking-widest',
+                  },
+                  'Bukti Nyata',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-16' },
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-gray-900',
+                  },
+                  'Apa Kata Pemilik Usaha di Depok',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'grid md:grid-cols-3 gap-6' },
+                [
+                  {
+                    name: 'Budi Santoso',
+                    business: 'Jasa Renovasi Rumah Depok',
+                    text: 'Sebelumnya website saya ada tapi tidak pernah ada yang menghubungi dari sana. Setelah dioptimasi, sekarang 5–8 inquiry per minggu datang dari Google. Closing rate kami naik drastis.',
+                    rating: 5,
+                  },
+                  {
+                    name: 'Siti Rahmawati',
+                    business: 'Catering Pernikahan Depok',
+                    text: 'Saya tidak percaya awalnya. Tapi setelah 2 bulan, website saya muncul di halaman 1 untuk keyword "catering wedding Depok". Sekarang hampir tidak perlu cari klien — klien yang datang sendiri.',
+                    rating: 5,
+                  },
+                  {
+                    name: 'Hendra Wijaya',
+                    business: 'Jasa Digital Marketing',
+                    text: 'Ironis memang — bisnis digital marketing tapi website sendiri tidak ranking. Setelah diperbaiki strukturnya, traffic organik naik 340% dalam 3 bulan pertama.',
+                    rating: 5,
+                  },
+                ].map((t, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 100 },
+                    React.createElement(
+                      'div',
+                      {
+                        className:
+                          'bg-white border border-gray-200 rounded-2xl p-7 flex flex-col',
+                      },
+                      React.createElement(
+                        'div',
+                        { className: 'flex mb-4' },
+                        Array.from({ length: t.rating }).map((_, si) =>
+                          React.createElement(Icons.Star, {
+                            key: si,
+                            size: 16,
+                            className: 'text-amber-400',
+                          }),
+                        ),
+                      ),
+                      React.createElement(
+                        'p',
+                        {
+                          className:
+                            'text-gray-700 leading-relaxed flex-1 mb-5 text-sm',
+                        },
+                        `"${t.text}"`,
+                      ),
+                      React.createElement(
+                        'div',
+                        null,
+                        React.createElement(
+                          'div',
+                          { className: 'font-bold text-gray-900' },
+                          t.name,
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: 'text-sm text-gray-500' },
+                          t.business,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // FAQ SECTION
+          React.createElement(
+            'section',
+            { className: 'py-20 px-6 bg-white' },
+            React.createElement(
+              'div',
+              { className: 'max-w-3xl mx-auto' },
+              React.createElement(
+                FadeIn,
+                { className: 'text-center mb-3' },
+                React.createElement(
+                  'span',
+                  {
+                    className:
+                      'text-blue-600 font-semibold text-sm uppercase tracking-widest',
+                  },
+                  'Pertanyaan Umum',
+                ),
+              ),
+              React.createElement(
+                FadeIn,
+                { delay: 80, className: 'text-center mb-16' },
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-gray-900',
+                  },
+                  'Yang Sering Ditanyakan',
+                ),
+              ),
+              React.createElement(
+                'div',
+                { className: 'space-y-3' },
+                faqs.map((faq, i) =>
+                  React.createElement(
+                    FadeIn,
+                    { key: i, delay: i * 80 },
+                    React.createElement(
+                      'div',
+                      {
+                        className: `border rounded-xl overflow-hidden transition-all ${openFaq === i ? 'border-blue-300' : 'border-gray-200'}`,
+                      },
+                      React.createElement(
+                        'button',
+                        {
+                          className:
+                            'w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors',
+                          onClick: () => setOpenFaq(openFaq === i ? null : i),
+                        },
+                        React.createElement(
+                          'span',
+                          { className: 'font-semibold text-gray-900 pr-4' },
+                          faq.q,
+                        ),
+                        React.createElement(Icons.ChevronDown, {
+                          size: 20,
+                          className: `flex-shrink-0 text-gray-400 transition-transform ${openFaq === i ? 'rotate-180' : ''}`,
+                        }),
+                      ),
+                      openFaq === i &&
+                        React.createElement(
+                          'div',
+                          { className: 'px-6 pb-6' },
+                          React.createElement(
+                            'p',
+                            { className: 'text-gray-600 leading-relaxed' },
+                            faq.a,
+                          ),
+                        ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          // CTA SECTION
+          React.createElement(
+            'section',
+            {
+              id: 'konsultasi',
+              className:
+                'py-24 px-6 bg-gradient-to-br from-blue-600 to-blue-800',
+            },
+            React.createElement(
+              'div',
+              { className: 'max-w-3xl mx-auto text-center' },
+              React.createElement(
+                FadeIn,
+                null,
+                React.createElement(
+                  'div',
+                  {
+                    className:
+                      'w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-white',
+                  },
+                  React.createElement(Icons.MessageSquare, { size: 32 }),
+                ),
+                React.createElement(
+                  'h2',
+                  {
+                    className:
+                      'text-3xl md:text-4xl font-extrabold text-white mb-4',
+                  },
+                  'Cek Website Anda Sekarang — Gratis',
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'text-blue-200 text-lg mb-8 leading-relaxed' },
+                  'Kami akan audit website Anda secara gratis dan tunjukkan dengan tepat kenapa website Anda tidak menghasilkan pelanggan — beserta langkah konkret untuk memperbaikinya.',
+                ),
+                React.createElement(
+                  'div',
+                  {
+                    className:
+                      'bg-white/10 border border-white/20 rounded-2xl p-8 mb-8',
+                  },
+                  React.createElement(
+                    'div',
+                    { className: 'grid sm:grid-cols-3 gap-6' },
+                    [
+                      {
+                        icon: React.createElement(Icons.Search, { size: 20 }),
+                        label: 'Audit SEO gratis',
+                        sub: 'Analisis penuh tanpa biaya',
+                      },
+                      {
+                        icon: React.createElement(Icons.Target, { size: 20 }),
+                        label: 'Keyword research',
+                        sub: 'Khusus bisnis & lokasi Anda',
+                      },
+                      {
+                        icon: React.createElement(Icons.TrendingUp, {
+                          size: 20,
+                        }),
+                        label: 'Roadmap perbaikan',
+                        sub: 'Langkah konkret & prioritas',
+                      },
+                    ].map((item, i) =>
+                      React.createElement(
+                        'div',
+                        { key: i, className: 'text-center' },
+                        React.createElement(
+                          'div',
+                          {
+                            className:
+                              'w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center mx-auto mb-2 text-white',
+                          },
+                          item.icon,
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: 'font-semibold text-white text-sm' },
+                          item.label,
+                        ),
+                        React.createElement(
+                          'div',
+                          { className: 'text-blue-300 text-xs mt-1' },
+                          item.sub,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                React.createElement(
+                  'a',
+                  {
+                    href: 'https://wa.me/6281384072641?text=Halo%2C%20saya%20ingin%20audit%20website%20gratis%20untuk%20bisnis%20saya%20di%20Depok',
+                    target: '_blank',
+                    rel: 'noopener noreferrer',
+                    className:
+                      'inline-flex items-center gap-3 bg-white text-blue-700 font-bold px-10 py-5 rounded-xl text-lg hover:bg-blue-50 transition-colors shadow-xl group',
+                  },
+                  React.createElement(Icons.Phone, { size: 22 }),
+                  'Minta Audit Gratis via WhatsApp',
+                  React.createElement(Icons.ArrowRight, {
+                    size: 20,
+                    className: 'group-hover:translate-x-1 transition-transform',
+                  }),
+                ),
+                React.createElement(
+                  'p',
+                  { className: 'text-blue-300 text-sm mt-5' },
+                  'Tidak ada komitmen. Tidak ada biaya tersembunyi. Hasilnya langsung Anda terima.',
+                ),
+              ),
+            ),
+          ),
+
+          // FOOTER
+          React.createElement(
+            'footer',
+            {
+              className:
+                'py-10 px-6 bg-gray-950 text-gray-500 text-center text-sm',
+            },
+            React.createElement(
+              'div',
+              { className: 'flex items-center justify-center gap-2 mb-3' },
+              React.createElement(
+                'div',
+                {
+                  className:
+                    'w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white',
+                },
+                React.createElement(Icons.TrendingUp, null),
+              ),
+              React.createElement(
+                'span',
+                { className: 'font-bold text-white' },
+                'WebSEO',
+                React.createElement(
+                  'span',
+                  { className: 'text-blue-400' },
+                  'Depok',
+                ),
+              ),
+            ),
+            React.createElement(
+              'p',
+              null,
+              'Jasa SEO & Website Profesional untuk Bisnis Lokal di Depok',
+            ),
+            React.createElement(
+              'p',
+              { className: 'mt-2' },
+              `© ${new Date().getFullYear()} WebSEODepok. Semua hak dilindungi.`,
+            ),
+          ),
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById('root'));
+      root.render(React.createElement(App));
+    </script>
+  </body>
+</html>
